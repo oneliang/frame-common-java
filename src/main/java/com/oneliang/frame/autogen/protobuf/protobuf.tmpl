@@ -1,0 +1,169 @@
+package <%=packageName%>;
+import java.io.IOException;
+<%if(needList){%>
+import java.util.List;
+<%}%>
+import com.lwx.protobuf.AbstractMessage;
+import com.lwx.protobuf.ComputeSizeUtil;
+import com.lwx.protobuf.InputReader;
+import com.lwx.protobuf.OutputWriter;
+import com.lwx.protobuf.DataType;
+
+public final class <%=className%> extends AbstractMessage{
+	<%for(var i=0;i<fieldList.length;i++){%>
+	<%	var type=fieldList[i].type;%>
+	<%	var name=fieldList[i].name;%>
+	<%	var value=fieldList[i].value;%>
+	public <%=type%> <%=name%>=<%=value%>;
+	private static final int fieldNumber<%=name.substring(0,1).toUpperCase()+name.substring(1,name.length)%> = <%=(i+1)%>;
+	<%}%>
+	public int computeSize() {
+		int totalSize = 0;
+		<%for(var i=0;i<fieldList.length;i++){%>
+		<%	var type=fieldList[i].type;%>
+		<%	var name=fieldList[i].name;%>
+		<%	var upperName=name.substring(0,1).toUpperCase()+name.substring(1,name.length);%>
+			<%if(type=='int'){%>
+			totalSize += ComputeSizeUtil.computeIntSize(fieldNumber<%=upperName%>, this.<%=name%>);
+			<%}else if(type=='long'){%>
+			totalSize += ComputeSizeUtil.computeLongSize(fieldNumber<%=upperName%>, this.<%=name%>);
+			<%}else if(type=='String'){%>
+			if (this.<%=name%> != null) {
+				totalSize += ComputeSizeUtil.computeStringSize(fieldNumber<%=upperName%>, this.<%=name%>);
+			}
+			<%}else if(type=='com.lwx.protobuf.ByteString'){%>
+			if (this.<%=name%> != null) {
+				totalSize += ComputeSizeUtil.computeByteStringSize(fieldNumber<%=upperName%>, this.<%=name%>);
+			}
+			<%}else if(type.indexOf('List')==0){%>
+			if (this.<%=name%> != null) {
+				<%var dataType=null;%>
+				<%var rawType=fieldList[i].rawType;%>
+				<%if(rawType=='Integer'){
+					dataType='DataType.INT';
+				}else if(rawType=='Long'){
+					dataType='DataType.LONG';
+				}else if(rawType=='String'){
+					dataType='DataType.STRING';
+				}else{
+					dataType='DataType.OBJECT';
+				}%>
+				totalSize += ComputeSizeUtil.computeListSize(fieldNumber<%=upperName%>, <%=dataType%>, this.<%=name%>);
+			}
+			<%}else{%>
+			if (this.<%=name%> != null) {
+				totalSize += ComputeSizeUtil.computeMessageSize(fieldNumber<%=upperName%>, this.<%=name%>.computeSize());
+			}
+			<%}%>
+		<%}%>
+		return totalSize;
+	}
+
+	public void writeFields(final OutputWriter writer) throws IOException {
+		<%for(var i=0;i<fieldList.length;i++){%>
+		<%	var type=fieldList[i].type;%>
+		<%	var name=fieldList[i].name;%>
+		<%	var upperName=name.substring(0,1).toUpperCase()+name.substring(1,name.length);%>
+			<%if(type=='int'){%>
+			writer.writeInt(fieldNumber<%=upperName%>, this.<%=name%>);
+			<%}else if(type=='long'){%>
+			writer.writeLong(fieldNumber<%=upperName%>, this.<%=name%>);
+			<%}else if(type=='String'){%>
+			if (this.<%=name%> != null) {
+				writer.writeString(fieldNumber<%=upperName%>, this.<%=name%>);
+			}
+			<%}else if(type=='com.lwx.protobuf.ByteString'){%>
+			if (this.<%=name%> != null) {
+				writer.writeByteString(fieldNumber<%=upperName%>, this.<%=name%>);
+			}
+			<%}else if(type.indexOf('List')==0){%>
+			if (this.<%=name%> != null) {
+				<%var dataType=null;%>
+				<%var rawType=fieldList[i].rawType;%>
+				<%if(rawType=='Integer'){
+					dataType='DataType.INT';
+				}else if(rawType=='Long'){
+					dataType='DataType.LONG';
+				}else if(rawType=='String'){
+					dataType='DataType.STRING';
+				}else{
+					dataType='DataType.OBJECT';
+				}%>
+				writer.writeList(fieldNumber<%=upperName%>, <%=dataType%>, this.<%=name%>);
+			}
+			<%}else{%>
+			if (this.<%=name%> != null) {
+				writer.writeMessage(fieldNumber<%=upperName%>, this.<%=name%>.computeSize());
+				this.<%=name%>.writeFields(writer);
+			}
+			<%}%>
+		<%}%>
+		writer.writeData();
+	}
+
+	public boolean foundAndParseField(final InputReader reader, final int fieldNumber) throws IOException {
+		boolean fieldFound = true;
+		switch (fieldNumber) {
+		<%for(var i=0;i<fieldList.length;i++){%>
+		<%	var type=fieldList[i].type;%>
+		<%	var name=fieldList[i].name;%>
+		<%	var upperName=name.substring(0,1).toUpperCase()+name.substring(1,name.length);%>
+		case fieldNumber<%=upperName%>:
+			<%if(type=='int'){%>
+			this.<%=name%> = reader.readInt(fieldNumber);
+			<%}else if(type=='long'){%>
+			this.<%=name%> = reader.readLong(fieldNumber);
+			<%}else if(type=='String'){%>
+			this.<%=name%> = reader.readString(fieldNumber);
+			<%}else if(type=='com.lwx.protobuf.ByteString'){%>
+			this.<%=name%> = reader.readByteString(fieldNumber);
+			<%}else if(type.indexOf('List')==0){%>
+				<%var rawType=fieldList[i].rawType;%>
+				<%if(rawType=='Integer'){%>
+					this.<%=name%>.add(reader.readInt(fieldNumber));
+				<%}else if(rawType=='Long'){%>
+					this.<%=name%>.add(reader.readLong(fieldNumber));
+				<%}else if(rawType=='String'){%>
+					this.<%=name%>.add(reader.readString(fieldNumber));
+				<%}else{%>
+					List<byte[]> <%=name%>List = reader.readMessages(fieldNumber<%=upperName%>);
+					for (int i = 0; i < <%=name%>List.size(); i++) {
+						byte[] eachByteArray = (byte[]) <%=name%>List.get(i);
+						<%=rawType%> object = new <%=rawType%>();
+						InputReader innerInputReader = new InputReader(eachByteArray, UNKNOWN_TAG_HANDLER);
+						boolean boolObject = true;
+						int nestedFieldObject = -1;
+						while (boolObject) {
+							nestedFieldObject = innerInputReader.getNextFieldNumber();
+							boolObject = object.foundAndParseField(innerInputReader, nestedFieldObject);
+						}
+						eachByteArray = null;
+						innerInputReader = null;
+						this.<%=name%>.add(object);
+					}
+				<%}%>
+			<%}else{%>
+			List<byte[]> <%=upperName%>List = reader.readMessages(fieldNumber<%=upperName%>);
+			for (int i = 0; i < <%=upperName%>List.size(); i++) {
+				byte[] eachByteArray = (byte[]) <%=upperName%>List.get(i);
+				<%=type%> object = new <%=type%>();
+				InputReader innerInputReader = new InputReader(eachByteArray, UNKNOWN_TAG_HANDLER);
+				boolean boolObject = true;
+				int nestedFieldObject = -1;
+				while (boolObject) {
+					nestedFieldObject = innerInputReader.getNextFieldNumber();
+					boolObject = object.foundAndParseField(innerInputReader, nestedFieldObject);
+				}
+				eachByteArray = null;
+				innerInputReader = null;
+				this.<%=name%> = object;
+			}
+			<%}%>
+			break;
+		<%}%>
+		default:
+			fieldFound = false;
+		}
+		return fieldFound;
+	}
+} 

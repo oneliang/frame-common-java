@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+	<bean id="admin" class="com.lwx.test.ioc.po.Admin">
+		<property name="user" reference="user"/>
+	</bean>
+	<bean id="user" class="com.lwx.test.ioc.po.User">
+		<property name="admin" reference="admin"/>
+	</bean>
+	<bean id="test" class="com.lwx.test.ioc.po.Test">
+		<property name="admin" reference="admin"/>
+		<property name="user" reference="user"/>
+	</bean>
+</beans>

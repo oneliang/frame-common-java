@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+	<action id="user" path="test" class="com.lwx.test.ioc.po.User">
+		<forward name="1" path="1"/>
+		<forward name="2" path="2"/>
+	</action>
+</actions>

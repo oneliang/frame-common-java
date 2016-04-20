@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE log SYSTEM "log.dtd">
+<log>
+	<!-- 
+		%c 输出日志信息所属的类的全名
+		%d 输出日志时间点的日期或时间,可以在其后指定格式,比如:%d{yyyy-MM-dd HH:mm:ss }，输出类似：2002-10-18 22:10:28
+		%f 输出日志信息所属的类的类名
+		%l 输出日志事件的发生位置,即输出日志信息的语句处于它所在的类的第几行
+		%m 输出代码中指定的方法
+		%n 输出一个回车换行符，Windows平台为"\r\n"，Unix平台为"\n"
+		%p 输出优先级,自定义优先级
+		%i 输出信息infomation
+	-->
+	<!-- 数字优先级越高级别越高 -->
+	<!-- 没有设置logger但程序里有用到日志打印的将会打印到default设置的文件里,并打印默认级别 -->
+	<!-- 已设置logger的则按设置的条件打印,没设置打印格式则按默认打印格式,没设置文件则打印到默认文件 -->
+	<default level="default" pattern="[%d] [%p] [%c(%f:%l)] [%m] [%i]%n" output="/log/defaultOutput.log"/>
+	<level id="default" priority="0" pattern="[%d] [%p] [%c(%f:%l)] [%m] [%i]%n"/>
+	<level id="pool" priority="1" pattern="[%d] [%p] [%c(%f:%l)] [%m] [%i]%n"/>
+	<level id="daemonThread" priority="1" pattern="[%d] [%p] [%c(%f:%l)] [%m] [%i]%n"/>
+	<level id="threadStatus" priority="1" pattern="[%d] [%p] [%c(%f:%l)] [%m] [%i]%n"/>
+	<output id="poolOutput" file="/log/poolOutput.log"/>
+	<output id="daemonThreadOutput" file="/log/daemonThreadOutput.log"/>
+	<output id="threadStatusOutput" file="/log/threadStatusOutput.log"/>
+	<logger id="poolLogger" target="com.lwx.frame.concurrent.ThreadPool">
+		<property name="level" reference="pool"/>
+		<property name="output" reference="poolOutput"/>
+	</logger>
+	<logger id="daemonThreadLogger" target="com.lwx.frame.concurrent.DaemonThread">
+		<property name="level" reference="daemonThread"/>
+		<property name="output" reference="daemonThreadOutput"/>
+	</logger>
+	<logger id="threadStatusLogger" target="com.lwx.frame.concurrent">
+		<property name="level" reference="threadStatus"/>
+		<property name="output" reference="threadStatusOutput"/>
+	</logger>
+</log>

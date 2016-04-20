@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping-files>
+	<mapping-file id="user-mapping" loaderClass="com.lwx.frame.ioc.MappingContext"
+		file="src/com/lwx/test/ioc/po/user-mapping.xml" />
+</mapping-files>

@@ -1,0 +1,21 @@
+package <%=packageName%>;
+
+public class <%=className%>{
+	<%for(var i=0;i<fieldList.length;i++){%>
+	<%	var type=fieldList[i].type;%>
+	<%	var name=fieldList[i].name;%>
+	<%	var value=fieldList[i].value;%>
+	private <%=type%> <%=name%>=<%=value%>;
+	<%}%>
+	<%for(var i=0;i<fieldList.length;i++){%>
+	<%	var type=fieldList[i].type;%>
+	<%	var name=fieldList[i].name;%>
+	<%	var value=fieldList[i].value;%>
+	public void set<%=name.substring(0,1).toUpperCase()+name.substring(1,name.length)%>(<%=type%> <%=name%>){
+		this.<%=name%>=<%=fieldList[i].name%>;
+	}
+	public <%=type%> get<%=name.substring(0,1).toUpperCase()+name.substring(1,name.length)%>(){
+		return this.<%=fieldList[i].name%>;
+	}
+	<%}%>
+} 

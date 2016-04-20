@@ -1,0 +1,45 @@
+package <%=packageName%>;
+
+import java.io.ByteArrayInputStream;
+
+public class <%=className%>{
+	<%for(var i=0;i<fieldList.length;i++){%>
+	<%	var type=fieldList[i].type;%>
+	<%	var name=fieldList[i].name;%>
+	<%	var value=fieldList[i].value;%>
+	private <%=type%> <%=name%>=<%=value%>;
+	<%}%>
+	<%for(var i=0;i<fieldList.length;i++){%>
+	<%	var type=fieldList[i].type;%>
+	<%	var name=fieldList[i].name;%>
+	<%	var value=fieldList[i].value;%>
+	public void set<%=name.substring(0,1).toUpperCase()+name.substring(1,name.length)%>(<%=type%> <%=name%>){
+		this.<%=name%>=<%=fieldList[i].name%>;
+	}
+	public <%=type%> get<%=name.substring(0,1).toUpperCase()+name.substring(1,name.length)%>(){
+		return this.<%=fieldList[i].name%>;
+	}
+	<%}%>
+	public static <%=className%> parse(byte[] source){
+		ByteArrayInputStream byteInputStream=new ByteArrayInputStream(source);
+		<%=className%> object=new <%=className%>();
+		<%for(var i=0;i<fieldList.length;i++){%>
+		<%	var type=fieldList[i].type;%>
+		<%	var name=fieldList[i].name;%>
+		<%	var value=fieldList[i].value;%>
+		<%	var byteCount=fieldList[i].byteCount;%>
+		<%if(i==0){%>
+		byte[] buffer=new byte[<%=byteCount%>];
+		<%}else{%>
+		buffer=new byte[<%=byteCount%>];
+		<%}%>
+		byteInputStream.read(buffer,0,buffer.length);
+		<%if(byteCount==1){%>
+			object.<%=name%>=buffer[0];
+		<%}else{%>
+			object.<%=name%>=buffer;
+		<%}%>
+		<%}%>
+		return object;
+	}
+} 

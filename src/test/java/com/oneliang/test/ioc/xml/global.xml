@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<global>
+	<configuration id="ioc" 
+		loaderClass="com.lwx.frame.ioc.IocContext"
+		file="src/com/lwx/test/ioc/xml/ioc.xml" />
+	<configuration id="action"
+		loaderClass="com.lwx.frame.ioc.ActionContext"
+		file="src/com/lwx/test/ioc/xml/action.xml" />
+	<configuration id="mappingFile"
+		loaderClass="com.lwx.frame.ioc.MappingFileContext"
+		file="src/com/lwx/test/ioc/xml/mapping-files.xml" />
+</global>

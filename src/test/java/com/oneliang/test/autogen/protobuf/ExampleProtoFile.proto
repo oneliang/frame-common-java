@@ -1,0 +1,13 @@
+package com.lwx.test.protobuf;
+
+message ExampleObject {
+	required int32 id = 1;
+	required string name = 2;
+	required Address address = 3;
+}
+
+message Address {
+	required string street = 1;
+	optional string state = 2;
+	repeated int64 photoList=3;
+}

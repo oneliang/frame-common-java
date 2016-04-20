@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping>
+	<bean table="t_user" class="com.lwx.test.java.User">
+		<id field="idTemp" column="idTemp"/>
+		<column field="idTemp" column="idTemp"/>
+	</bean>
+</mapping>

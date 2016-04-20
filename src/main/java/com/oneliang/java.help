@@ -1,0 +1,4 @@
+package is define for function or module(such as exception,classloader,package-util can put in the same package)
+public package for frame,such as:
+com.lwx.java.exception
+com.lwx.java.util
