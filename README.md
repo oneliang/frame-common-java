@@ -20,3 +20,7 @@ cd frame-common-java
 gradle build 
 ```
 
+### Use for eclipse
+```
+gradle eclipse
+```
