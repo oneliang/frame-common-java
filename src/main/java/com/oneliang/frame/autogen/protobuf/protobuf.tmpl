@@ -27,6 +27,12 @@ public final class <%=className%> extends AbstractMessage{
 			totalSize += ComputeSizeUtil.computeIntSize(fieldNumber<%=upperName%>, this.<%=name%>);
 			<%}else if(type=='long'){%>
 			totalSize += ComputeSizeUtil.computeLongSize(fieldNumber<%=upperName%>, this.<%=name%>);
+			<%}else if(type=='boolean'){%>
+			totalSize += ComputeSizeUtil.computeBooleanSize(fieldNumber<%=upperName%>, this.<%=name%>);
+			<%}else if(type=='float'){%>
+			totalSize += ComputeSizeUtil.computeFloatSize(fieldNumber<%=upperName%>, this.<%=name%>);
+			<%}else if(type=='double'){%>
+			totalSize += ComputeSizeUtil.computeDoubleSize(fieldNumber<%=upperName%>, this.<%=name%>);
 			<%}else if(type=='String'){%>
 			if (this.<%=name%> != null) {
 				totalSize += ComputeSizeUtil.computeStringSize(fieldNumber<%=upperName%>, this.<%=name%>);
@@ -43,6 +49,12 @@ public final class <%=className%> extends AbstractMessage{
 					dataType='DataType.INT';
 				}else if(rawType=='Long'){
 					dataType='DataType.LONG';
+				}else if(rawType=='Boolean'){
+					dataType='DataType.BOOLEAN';
+				}else if(rawType=='Float'){
+					dataType='DataType.FLOAT';
+				}else if(rawType=='Double'){
+					dataType='DataType.DOUBLE';
 				}else if(rawType=='String'){
 					dataType='DataType.STRING';
 				}else{
@@ -68,6 +80,12 @@ public final class <%=className%> extends AbstractMessage{
 			writer.writeInt(fieldNumber<%=upperName%>, this.<%=name%>);
 			<%}else if(type=='long'){%>
 			writer.writeLong(fieldNumber<%=upperName%>, this.<%=name%>);
+			<%}else if(type=='boolean'){%>
+			writer.writeBoolean(fieldNumber<%=upperName%>, this.<%=name%>);
+			<%}else if(type=='float'){%>
+			writer.writeFloat(fieldNumber<%=upperName%>, this.<%=name%>);
+			<%}else if(type=='double'){%>
+			writer.writeDouble(fieldNumber<%=upperName%>, this.<%=name%>);
 			<%}else if(type=='String'){%>
 			if (this.<%=name%> != null) {
 				writer.writeString(fieldNumber<%=upperName%>, this.<%=name%>);
@@ -83,7 +101,13 @@ public final class <%=className%> extends AbstractMessage{
 				<%if(rawType=='Integer'){
 					dataType='DataType.INT';
 				}else if(rawType=='Long'){
-					dataType='DataType.LONG';
+					dataType='DataType.LONG'
+					}else if(rawType=='Boolean'){
+					dataType='DataType.BOOLEAN';
+				}else if(rawType=='Float'){
+					dataType='DataType.FLOAT';
+				}else if(rawType=='Double'){
+					dataType='DataType.DOUBLE';;
 				}else if(rawType=='String'){
 					dataType='DataType.STRING';
 				}else{
@@ -113,6 +137,12 @@ public final class <%=className%> extends AbstractMessage{
 			this.<%=name%> = reader.readInt(fieldNumber);
 			<%}else if(type=='long'){%>
 			this.<%=name%> = reader.readLong(fieldNumber);
+			<%}else if(type=='boolean'){%>
+			this.<%=name%> = reader.readBoolean(fieldNumber);
+			<%}else if(type=='float'){%>
+			this.<%=name%> = reader.readFloat(fieldNumber);
+			<%}else if(type=='double'){%>
+			this.<%=name%> = reader.readDouble(fieldNumber);
 			<%}else if(type=='String'){%>
 			this.<%=name%> = reader.readString(fieldNumber);
 			<%}else if(type=='com.lwx.protobuf.ByteString'){%>
@@ -123,6 +153,12 @@ public final class <%=className%> extends AbstractMessage{
 					this.<%=name%>.add(reader.readInt(fieldNumber));
 				<%}else if(rawType=='Long'){%>
 					this.<%=name%>.add(reader.readLong(fieldNumber));
+				<%}else if(rawType=='Boolean'){%>
+					this.<%=name%>.add(reader.readBoolean(fieldNumber));
+				<%}else if(rawType=='Float'){%>
+					this.<%=name%>.add(reader.readFloat(fieldNumber));
+				<%}else if(rawType=='Double'){%>
+					this.<%=name%>.add(reader.readDouble(fieldNumber));
 				<%}else if(rawType=='String'){%>
 					this.<%=name%>.add(reader.readString(fieldNumber));
 				<%}else{%>

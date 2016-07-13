@@ -132,6 +132,15 @@ public class ProtobufAutoGenerateContext extends AutoGenerateContext {
 			}else if(protobufType.equals("bytes")){
 				javaType.type="com.lwx.protobuf.ByteString";
 				javaType.value=StringUtil.NULL;
+			}else if(protobufType.equals("bool")){
+				javaType.type=rawType?"Boolean":"boolean";
+				javaType.value=String.valueOf(false);
+			}else if(protobufType.equals("float")){
+				javaType.type=rawType?"Float":"float";
+				javaType.value="0f";
+			}else if(protobufType.equals("double")){
+				javaType.type=rawType?"Double":"double";
+				javaType.value="0d";		
 			}else{
 				javaType.type=protobufType;
 				javaType.value="new "+protobufType+"()";
