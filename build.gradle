@@ -59,7 +59,7 @@ publishing {
     }
 }
 
-task outputDependencies(type: Copy) {
+task copyDependencies(type: Copy) {
     into "$buildDir/dependencies"
     from configurations.runtime
 }
