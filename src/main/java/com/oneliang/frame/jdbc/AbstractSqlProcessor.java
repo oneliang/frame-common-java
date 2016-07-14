@@ -139,6 +139,8 @@ public abstract class AbstractSqlProcessor implements SqlProcessor {
 					value=new Date(((Timestamp)value).getTime());
 				}
 				break;
+			default:
+				break;
 			}
 		}catch (Exception e) {
 			throw new RuntimeException(e);

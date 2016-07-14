@@ -1,4 +1,4 @@
-package com.oneliang.test.annotation;
+package com.oneliang.frame.test;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

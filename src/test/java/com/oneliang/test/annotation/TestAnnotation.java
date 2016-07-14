@@ -2,6 +2,8 @@ package com.oneliang.test.annotation;
 
 import java.lang.reflect.Method;
 
+import com.oneliang.frame.test.Test;
+
 
 public class TestAnnotation {
 	public static void main(String[] args){
