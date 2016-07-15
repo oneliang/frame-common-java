@@ -25,17 +25,17 @@ public class SectionDiffData {
 
 	public byte[] toByteArray() throws Exception{
 		ByteArrayOutputStream byteArrayOutputStream=new ByteArrayOutputStream();
-		if(this.sectionPositionMoveList!=null&&!this.sectionPositionMoveList.isEmpty()){
-			ByteArrayOutputStream moveListOutputStream=new ByteArrayOutputStream();
-			for(SectionPosition sectionPosition:this.sectionPositionMoveList){
-				moveListOutputStream.write(MathUtil.intToByteArray(sectionPosition.getFromIndex()));
-				moveListOutputStream.write(MathUtil.intToByteArray(sectionPosition.getToIndex()));
-			}
-			byteArrayOutputStream.write(MathUtil.intToByteArray(OPCODE_MOVE));
-			byte[] moveByteArray=moveListOutputStream.toByteArray();
-			byteArrayOutputStream.write(MathUtil.intToByteArray(moveByteArray.length));
-			byteArrayOutputStream.write(moveByteArray);
-		}
+//		if(this.sectionPositionMoveList!=null&&!this.sectionPositionMoveList.isEmpty()){
+//			ByteArrayOutputStream moveListOutputStream=new ByteArrayOutputStream();
+//			for(SectionPosition sectionPosition:this.sectionPositionMoveList){
+//				moveListOutputStream.write(MathUtil.intToByteArray(sectionPosition.getFromIndex()));
+//				moveListOutputStream.write(MathUtil.intToByteArray(sectionPosition.getToIndex()));
+//			}
+//			byteArrayOutputStream.write(MathUtil.intToByteArray(OPCODE_MOVE));
+//			byte[] moveByteArray=moveListOutputStream.toByteArray();
+//			byteArrayOutputStream.write(MathUtil.intToByteArray(moveByteArray.length));
+//			byteArrayOutputStream.write(moveByteArray);
+//		}
 		if(this.sectionPositionIncreaseList!=null&&!this.sectionPositionIncreaseList.isEmpty()){
 			ByteArrayOutputStream increaseListOutputStream=new ByteArrayOutputStream();
 			for(SectionPosition sectionPosition:this.sectionPositionIncreaseList){

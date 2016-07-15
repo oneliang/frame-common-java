@@ -40,10 +40,54 @@ public class SectionDiff {
 		for(SectionPosition sectionPosition:sectionPositionMoveList){
 			System.out.println("move:"+sectionPosition);
 		}
+		System.out.println("original:"+sectionPositionMoveList.size()*2*4);
+		this.mergeSectionPositionMoveList(sectionPositionMoveList);
 		for(SectionPosition sectionPosition:sectionPositionIncreaseList){
 			System.out.println("increase:"+sectionPosition);
 		}
 		return new SectionDiffData(sectionPositionMoveList, sectionPositionIncreaseList);
+	}
+
+	public List<MergeSectionPosition> mergeSectionPositionMoveList(List<SectionPosition> sectionPositionMoveList){
+		List<MergeSectionPosition> mergeSectionPositionList=new ArrayList<MergeSectionPosition>();
+		if(sectionPositionMoveList!=null){
+			SectionPosition pre=null;
+			MergeSectionPosition merge=null;
+			for(SectionPosition cur:sectionPositionMoveList){
+				if(pre!=null){
+					if((cur.getFromIndex()-pre.getFromIndex()==1)&&(cur.getToIndex()-pre.getToIndex()==1)){
+//						System.out.println(String.format("Section merge,f(%s->%s),t(%s->%s)",pre.getFromIndex(),cur.getFromIndex(),pre.getToIndex(),cur.getToIndex()));
+						if(merge==null){
+							merge=new MergeSectionPosition();
+							mergeSectionPositionList.add(merge);
+						}
+						if(merge.oldBegin==-1){
+							merge.oldBegin=pre.getFromIndex();
+						}
+						merge.oldEnd=cur.getFromIndex();
+						if(merge.newBegin==-1){
+							merge.newBegin=pre.getToIndex();
+						}
+						merge.newEnd=cur.getToIndex();
+//						System.out.println(String.format("after merge:(%s->%s),new:(%s->%s)",merge.oldBegin,merge.oldEnd,merge.newBegin,merge.newEnd));
+					}else{
+						merge=null;
+						MergeSectionPosition original=new MergeSectionPosition();
+						original.oldBegin=pre.getFromIndex();
+						original.oldEnd=pre.getFromIndex();
+						original.newBegin=pre.getToIndex();
+						original.newEnd=pre.getToIndex();
+						mergeSectionPositionList.add(original);
+					}
+				}
+				pre=cur;
+			}
+		}
+		for(MergeSectionPosition merge:mergeSectionPositionList){
+			System.out.println(String.format("after merge:old:(%s->%s),new:(%s->%s)",merge.oldBegin,merge.oldEnd,merge.newBegin,merge.newEnd));
+		}
+		System.out.println("total merge move:"+mergeSectionPositionList.size()*4*4);
+		return mergeSectionPositionList;
 	}
 
 //	@SuppressWarnings("unchecked")
