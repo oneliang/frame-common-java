@@ -21,16 +21,12 @@ import javax.servlet.http.HttpServletResponseWrapper;
 import com.oneliang.Constant;
 import com.oneliang.util.common.StringUtil;
 import com.oneliang.util.file.FileUtil;
-import com.oneliang.util.log.Logger;
+import com.oneliang.util.logging.Logger;
+import com.oneliang.util.logging.LoggerManager;
 
 public final class ActionUtil{
 
-	/**
-	 * serialVersionUID
-	 */
-	private static final long serialVersionUID = 5172649641869938138L;
-
-	private static final Logger logger=Logger.getLogger(ActionUtil.class);
+	private static final Logger logger=LoggerManager.getLogger(ActionUtil.class);
 
 	private static final String REGEX = "\\{[\\w]*\\}";
 	private static final String FIRST_REGEX="\\{";

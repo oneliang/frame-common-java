@@ -3,18 +3,19 @@ package com.oneliang.frame.broadcast;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 import java.util.Map.Entry;
+import java.util.Queue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.oneliang.Constant;
-import com.oneliang.util.log.Logger;
+import com.oneliang.util.logging.Logger;
+import com.oneliang.util.logging.LoggerManager;
 
 public class BroadcastManager implements BroadcastSender,Runnable{
 
-	private static final Logger logger=Logger.getLogger(BroadcastManager.class);
+	private static final Logger logger=LoggerManager.getLogger(BroadcastManager.class);
 
     protected Map<String,List<BroadcastReceiver>> broadcastReceiverMap=new ConcurrentHashMap<String,List<BroadcastReceiver>>(); 
     protected Queue<Message> messageQueue=new ConcurrentLinkedQueue<Message>();

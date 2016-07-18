@@ -6,7 +6,8 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
 import com.oneliang.Constant;
 import com.oneliang.util.common.StringUtil;
 import com.oneliang.util.common.TimeUtil;
-import com.oneliang.util.log.Logger;
+import com.oneliang.util.logging.Logger;
+import com.oneliang.util.logging.LoggerManager;
 
 public class TimeMillisToDateTag extends BodyTagSupport {
 
@@ -15,7 +16,7 @@ public class TimeMillisToDateTag extends BodyTagSupport {
 	 */
 	private static final long serialVersionUID = -4155763064911316797L;
 
-	private static final Logger logger=Logger.getLogger(TimeMillisToDateTag.class);
+	private static final Logger logger=LoggerManager.getLogger(TimeMillisToDateTag.class);
 
 	private String value=null;
 	private String format=TimeUtil.YEAR_MONTH_DAY_HOUR_MINUTE_SECOND;

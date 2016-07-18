@@ -9,7 +9,8 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
 import com.oneliang.Constant;
 import com.oneliang.frame.i18n.MessageContext;
 import com.oneliang.util.common.StringUtil;
-import com.oneliang.util.log.Logger;
+import com.oneliang.util.logging.Logger;
+import com.oneliang.util.logging.LoggerManager;
 
 public class MessageTag extends BodyTagSupport {
 
@@ -18,7 +19,7 @@ public class MessageTag extends BodyTagSupport {
 	 */
 	private static final long serialVersionUID = -4127533235059676726L;
 
-	private static final Logger logger=Logger.getLogger(MessageTag.class);
+	private static final Logger logger=LoggerManager.getLogger(MessageTag.class);
 
 	private static final String LOCALE="locale";
 

@@ -12,11 +12,12 @@ import com.oneliang.frame.broadcast.Message;
 import com.oneliang.util.common.ObjectUtil;
 import com.oneliang.util.jar.JarClassLoader;
 import com.oneliang.util.jar.JarUtil;
-import com.oneliang.util.log.Logger;
+import com.oneliang.util.logging.Logger;
+import com.oneliang.util.logging.LoggerManager;
 
 public class PluginFileBean {
 
-	private static final Logger logger=Logger.getLogger(PluginFileBean.class);
+	private static final Logger logger=LoggerManager.getLogger(PluginFileBean.class);
 
 	public static final int TYPE_SOURCE_CODE=0;
 	public static final int TYPE_JAR=1;

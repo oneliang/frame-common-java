@@ -17,21 +17,22 @@ import javax.servlet.http.HttpServletResponse;
 import com.oneliang.Constant;
 import com.oneliang.frame.ConfigurationFactory;
 import com.oneliang.frame.configuration.ConfigurationContext;
+import com.oneliang.frame.servlet.action.Action.RequestMapping.RequestParameter;
 import com.oneliang.frame.servlet.action.ActionBean;
 import com.oneliang.frame.servlet.action.ActionExecuteException;
 import com.oneliang.frame.servlet.action.ActionForwardBean;
 import com.oneliang.frame.servlet.action.ActionInterceptorBean;
 import com.oneliang.frame.servlet.action.ActionInterface;
+import com.oneliang.frame.servlet.action.ActionInterface.HttpRequestMethod;
 import com.oneliang.frame.servlet.action.AnnotationActionBean;
 import com.oneliang.frame.servlet.action.Interceptor;
-import com.oneliang.frame.servlet.action.Action.RequestMapping.RequestParameter;
-import com.oneliang.frame.servlet.action.ActionInterface.HttpRequestMethod;
 import com.oneliang.util.common.ClassUtil;
+import com.oneliang.util.common.ClassUtil.ClassProcessor;
 import com.oneliang.util.common.ObjectUtil;
 import com.oneliang.util.common.RequestUtil;
 import com.oneliang.util.common.StringUtil;
-import com.oneliang.util.common.ClassUtil.ClassProcessor;
-import com.oneliang.util.log.Logger;
+import com.oneliang.util.logging.Logger;
+import com.oneliang.util.logging.LoggerManager;
 /**
  * com.lwx.frame.servlet.Listener.java
  * @author Dandelion
@@ -46,7 +47,7 @@ public class ActionListener extends HttpServlet{
 	 */
 	private static final long serialVersionUID = 8982018678465106212L;
 	
-	private static final Logger logger=Logger.getLogger(ActionListener.class);
+	private static final Logger logger=LoggerManager.getLogger(ActionListener.class);
 
 	private static final String INIT_PARAMETER_CLASS_PROCESSOR="classProcessor";
 
@@ -84,7 +85,7 @@ public class ActionListener extends HttpServlet{
 	public void destroy() {
 		super.destroy(); // Just puts "destroy" string in log
 		// Put your code here
-		logger.log("System is shutting down,listener is deleting,please wait");
+		logger.info("System is shutting down,listener is deleting,please wait");
 	}
 
 	/**
@@ -156,7 +157,7 @@ public class ActionListener extends HttpServlet{
 			//uri
 			String uri=request.getRequestURI();
 			
-			logger.log("System is requesting uri--:"+uri);
+			logger.info("System is requesting uri--:"+uri);
 			
 			int front=request.getContextPath().length();
 	//		int rear=uri.lastIndexOf(StaticVar.DOT);
@@ -164,7 +165,7 @@ public class ActionListener extends HttpServlet{
 			uri=uri.substring(front,uri.length());
 	//		}
 	//		uri=uri.substring(front,rear);
-			logger.log("The request name is--:"+uri);
+			logger.info("The request name is--:"+uri);
 			
 			//global interceptor doIntercept
 			List<Interceptor> beforeGlobalInterceptorList=ConfigurationFactory.getBeforeGlobalInterceptorList();
@@ -172,7 +173,7 @@ public class ActionListener extends HttpServlet{
 			
 			//through the interceptor
 			if(beforeGlobalInterceptorSign){
-				logger.log("Through the before global interceptors!");
+				logger.info("Through the before global interceptors!");
 				try {
 					List<ActionBean> actionBeanList=ConfigurationFactory.findActionBeanList(uri);
 					if(actionBeanList!=null&&!actionBeanList.isEmpty()){
@@ -188,7 +189,7 @@ public class ActionListener extends HttpServlet{
 							List<ActionInterceptorBean> beforeActionBeanInterceptorList=actionBean.getBeforeActionInterceptorBeanList();
 							boolean beforeActionInterceptorSign=doActionInterceptorBeanList(beforeActionBeanInterceptorList, request, response);
 							if(beforeActionInterceptorSign){
-								logger.log("Through the before action interceptors!");
+								logger.info("Through the before action interceptors!");
 								Object actionInstance=actionBean.getActionInstance();
 								if(actionInstance instanceof ActionInterface){
 									doAction(actionBean, request, response, httpRequestMethod);
@@ -196,34 +197,34 @@ public class ActionListener extends HttpServlet{
 									doAnnotationAction(actionBean, request, response, httpRequestMethod);
 								}
 							}else{
-								logger.log("Can not through the before action interceptors");
+								logger.info("Can not through the before action interceptors");
 								response.sendError(Constant.Http.StatusCode.FORBIDDEN);
 							}
 						}else{
-							logger.log("Method not allowed,http request method:"+httpRequestMethod);
+							logger.info("Method not allowed,http request method:"+httpRequestMethod);
 							response.sendError(Constant.Http.StatusCode.METHOD_NOT_ALLOWED);
 						}
 					}else{
-						logger.log("The request name--:"+uri+" is not exist,please config the name and entity class");
+						logger.info("The request name--:"+uri+" is not exist,please config the name and entity class");
 						response.sendError(Constant.Http.StatusCode.NOT_FOUND);
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
 					logger.error(Constant.Base.EXCEPTION, e);
-					logger.log("Action or page is not exist");
+					logger.info("Action or page is not exist");
 					String exceptionPath=ConfigurationFactory.getGlobalExceptionForwardPath();
 					if(exceptionPath!=null){
 						request.setAttribute(Constant.Base.EXCEPTION, e);
 						RequestDispatcher requestDispatcher=request.getRequestDispatcher(exceptionPath);
 						requestDispatcher.forward(request,response);
-						logger.log("Forward to exception path:"+exceptionPath);
+						logger.info("Forward to exception path:"+exceptionPath);
 					}else{
-						logger.log("System can not find the exception path.Please config the global exception forward path.");
+						logger.info("System can not find the exception path.Please config the global exception forward path.");
 						response.sendError(Constant.Http.StatusCode.INTERNAL_SERVER_ERROR);
 					}
 				}
 			}else{
-				logger.log("Can not through the before global interceptors");
+				logger.info("Can not through the before global interceptors");
 				response.sendError(Constant.Http.StatusCode.FORBIDDEN);
 			}
 		}
@@ -244,7 +245,7 @@ public class ActionListener extends HttpServlet{
 	 * @throws ServletException if an error occurs
 	 */
 	public void init() throws ServletException {
-		logger.log("System is starting up,listener is initial");
+		logger.info("System is starting up,listener is initial");
 		String classProcessorClassName=getInitParameter(INIT_PARAMETER_CLASS_PROCESSOR);
 		if(StringUtil.isNotBlank(classProcessorClassName)){
 			try {
@@ -275,7 +276,7 @@ public class ActionListener extends HttpServlet{
 		if(actionInstance instanceof ActionInterface){
 			ActionInterface actionInterface=(ActionInterface)actionInstance;
 			String forward=null;
-			logger.log("Action implements ("+actionInstance+") is executing");
+			logger.info("Action implements ("+actionInstance+") is executing");
 			//judge is it contain static file page
 			Map<String,String[]> parameterMap=(Map<String,String[]>)request.getParameterMap();
 			ActionForwardBean actionForwardBean=actionBean.findActionForwardBeanByStaticParameter(parameterMap);
@@ -290,40 +291,40 @@ public class ActionListener extends HttpServlet{
 			}//else normal execute
 			if(normalExecute||needToStaticExecute){
 				if(normalExecute){
-					logger.log("Normal executing");
+					logger.info("Normal executing");
 				}else if(needToStaticExecute){
-					logger.log("Need to static execute,first time executing original action");
+					logger.info("Need to static execute,first time executing original action");
 				}
 				forward=actionInterface.execute(request, response);
 			}else{
-				logger.log("Static execute,not the first time execute");
+				logger.info("Static execute,not the first time execute");
 				forward=actionForwardBean.getName();
 			}
 			List<ActionInterceptorBean> afterActionBeanInterceptorList=actionBean.getAfterActionInterceptorBeanList();
 			boolean afterActionInterceptorSign=doActionInterceptorBeanList(afterActionBeanInterceptorList, request, response);
 			if(afterActionInterceptorSign){
-				logger.log("Through the after action interceptors!");
+				logger.info("Through the after action interceptors!");
 				List<Interceptor> afterGlobalInterceptorList=ConfigurationFactory.getAfterGlobalInterceptorList();
 				boolean afterGlobalInterceptorSign=doGlobalInterceptorList(afterGlobalInterceptorList, request, response);
 				if(afterGlobalInterceptorSign){
-					logger.log("Through the after global interceptors!");
+					logger.info("Through the after global interceptors!");
 					if(forward!=null){
 						String path=actionBean.findForwardPath(forward);
 						if(path!=null){
-							logger.log("The forward name in configFile is--:actionPath:"+actionBean.getPath()+"--forward:"+forward+"--path:"+path);
+							logger.info("The forward name in configFile is--:actionPath:"+actionBean.getPath()+"--forward:"+forward+"--path:"+path);
 						}else{
 							path=ConfigurationFactory.findGlobalForwardPath(forward);
-							logger.log("The forward name in global forward configFile is--:forward:"+forward+"--path:"+path);
+							logger.info("The forward name in global forward configFile is--:forward:"+forward+"--path:"+path);
 						}
 						this.doForward(normalExecute, needToStaticExecute, actionForwardBean, path, request, response, false);
 					}else{
-						logger.log("The forward name--:"+forward+" is not exist,may be ajax use if not please config the name and entity page or class");
+						logger.info("The forward name--:"+forward+" is not exist,may be ajax use if not please config the name and entity page or class");
 					}
 				}else{
-					logger.log("Can not through the after global interceptors");
+					logger.info("Can not through the after global interceptors");
 				}
 			}else{
-				logger.log("Can not through the after action interceptors");
+				logger.info("Can not through the after action interceptors");
 			}
 			result=true;
 		}
@@ -407,9 +408,9 @@ public class ActionListener extends HttpServlet{
 			}
 			if(normalExecute||needToStaticExecute){
 				if(normalExecute){
-					logger.log("Common bean action ("+actionInstance+") is executing.");
+					logger.info("Common bean action ("+actionInstance+") is executing.");
 				}else if(needToStaticExecute){
-					logger.log("Need to static execute,first time executing original action");
+					logger.info("Need to static execute,first time executing original action");
 				}
 				Object[] parameterValues=this.annotationActionMethodParameterValues(annotationActionBean, request, response);
 				Object methodInvokeValue=annotationActionBean.getMethod().invoke(actionInstance, parameterValues);
@@ -417,16 +418,16 @@ public class ActionListener extends HttpServlet{
 					path=methodInvokeValue.toString();
 				}
 			}else{
-				logger.log("Static execute,not the first time execute");
+				logger.info("Static execute,not the first time execute");
 			}
 			List<ActionInterceptorBean> afterActionBeanInterceptorList=actionBean.getAfterActionInterceptorBeanList();
 			boolean afterActionInterceptorSign=doActionInterceptorBeanList(afterActionBeanInterceptorList, request, response);
 			if(afterActionInterceptorSign){
-				logger.log("Through the after action interceptors!");
+				logger.info("Through the after action interceptors!");
 				List<Interceptor> afterGlobalInterceptorList=ConfigurationFactory.getAfterGlobalInterceptorList();
 				boolean afterGlobalInterceptorSign=doGlobalInterceptorList(afterGlobalInterceptorList, request, response);
 				if(afterGlobalInterceptorSign){
-					logger.log("Through the after global interceptors!");
+					logger.info("Through the after global interceptors!");
 					this.doForward(normalExecute, needToStaticExecute, actionForwardBean, path, request, response, true);
 				}
 			}
@@ -450,7 +451,7 @@ public class ActionListener extends HttpServlet{
 	private void doForward(boolean normalExecute,boolean needToStaticExecute,ActionForwardBean actionForwardBean,String path,HttpServletRequest request,HttpServletResponse response,boolean annotationBeanExecute) throws ServletException, IOException{
 		if(!normalExecute&&!needToStaticExecute){
 			String staticFilePath=actionForwardBean.getStaticFilePath();
-			logger.log("Send redirect to static file path:"+staticFilePath);
+			logger.info("Send redirect to static file path:"+staticFilePath);
 			RequestDispatcher requestDispatcher=request.getRequestDispatcher(staticFilePath);
 			requestDispatcher.forward(request,response);
 		}else{
@@ -458,9 +459,9 @@ public class ActionListener extends HttpServlet{
 				path=ActionUtil.parsePath(path);
 				if(normalExecute){
 					if(annotationBeanExecute){
-						logger.log("Annotation bean action executed forward path:"+path);
+						logger.info("Annotation bean action executed forward path:"+path);
 					}else{
-						logger.log("Normal executed forward path:"+path);
+						logger.info("Normal executed forward path:"+path);
 					}
 					RequestDispatcher requestDispatcher=request.getRequestDispatcher(path);
 					requestDispatcher.forward(request,response);
@@ -468,19 +469,19 @@ public class ActionListener extends HttpServlet{
 					String staticFilePath=actionForwardBean.getStaticFilePath();
 					ConfigurationContext configurationContext=ConfigurationFactory.getSingletonConfigurationContext();
 					if(StaticFilePathUtil.staticize(path, configurationContext.getProjectRealPath()+staticFilePath, request, response)){
-						logger.log("Static executed success,redirect static file:"+staticFilePath);
+						logger.info("Static executed success,redirect static file:"+staticFilePath);
 						RequestDispatcher requestDispatcher=request.getRequestDispatcher(staticFilePath);
 						requestDispatcher.forward(request,response);
 						StaticFilePathUtil.addStaticFilePath(staticFilePath, staticFilePath);
 					}else{
-						logger.log("Static executed failure,file:"+staticFilePath);
+						logger.info("Static executed failure,file:"+staticFilePath);
 					}
 				}
 			}else{
 				if(annotationBeanExecute){
-					logger.log("May be ajax use if not please config the entity page with String type.");
+					logger.info("May be ajax use if not please config the entity page with String type.");
 				}else{
-					logger.log("System can not find the path:"+path);
+					logger.info("System can not find the path:"+path);
 				}
 			}
 		}
@@ -499,7 +500,7 @@ public class ActionListener extends HttpServlet{
 			try{
 				for(Interceptor globalInterceptor:interceptorList){
 					boolean sign=globalInterceptor.doIntercept(request, response);
-					logger.log("Global intercept:"+sign+",interceptor:"+globalInterceptor);
+					logger.info("Global intercept:"+sign+",interceptor:"+globalInterceptor);
 					if(!sign){
 						interceptorSign=false;
 						break;
@@ -528,7 +529,7 @@ public class ActionListener extends HttpServlet{
 					Interceptor actionInterceptor=actionInterceptorBean.getInterceptorInstance();
 					if(actionInterceptor!=null){
 						boolean sign=actionInterceptor.doIntercept(request, response);
-						logger.log("Action intercept:"+sign+",interceptor:"+actionInterceptor);
+						logger.info("Action intercept:"+sign+",interceptor:"+actionInterceptor);
 						if(!sign){
 							actionInterceptorBeanSign=false;
 							break;

@@ -13,7 +13,8 @@ import com.oneliang.Constant;
 import com.oneliang.frame.log.LoggerContext;
 import com.oneliang.util.concurrent.ThreadPool;
 import com.oneliang.util.concurrent.ThreadTask;
-import com.oneliang.util.log.Logger;
+import com.oneliang.util.logging.Logger;
+import com.oneliang.util.logging.LoggerManager;
 
 public class TestHttpServer {
 
@@ -62,13 +63,8 @@ public class TestHttpServer {
 	}
 }
 class HttpProcessor implements ThreadTask{
-	
-	/**
-	 * serialVersionUID
-	 */
-	private static final long serialVersionUID = -7052511349865507080L;
-	
-	private static final Logger logger=Logger.getLogger(HttpProcessor.class);
+
+	private static final Logger logger=LoggerManager.getLogger(HttpProcessor.class);
 
 	private static final String HTTP_GET="GET";
 	private static final String HTTP_POST="POST";
@@ -110,7 +106,7 @@ class HttpProcessor implements ThreadTask{
 			}
 			outputStream.flush();
 			inputStream.close();
-			logger.log("request complete.");
+			logger.info("request complete.");
 		}
 	}
 	
@@ -125,6 +121,6 @@ class HttpProcessor implements ThreadTask{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		logger.log("socket closed.");
+		logger.info("socket closed.");
 	}
 }

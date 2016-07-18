@@ -2,8 +2,8 @@ package com.oneliang.frame.configuration;
 
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.w3c.dom.Document;
@@ -18,11 +18,12 @@ import com.oneliang.frame.Context;
 import com.oneliang.util.common.JavaXmlUtil;
 import com.oneliang.util.common.ObjectUtil;
 import com.oneliang.util.common.StringUtil;
-import com.oneliang.util.log.Logger;
+import com.oneliang.util.logging.Logger;
+import com.oneliang.util.logging.LoggerManager;
 
 public class ConfigurationContext extends AbstractContext {
 
-	private static final Logger logger=Logger.getLogger(ConfigurationContext.class);
+	private static final Logger logger=LoggerManager.getLogger(ConfigurationContext.class);
 
 	protected static final Map<String,ConfigurationBean> configurationBeanMap=new ConcurrentHashMap<String,ConfigurationBean>();
 	protected final Map<String,ConfigurationBean> selfConfigurationBeanMap=new ConcurrentHashMap<String,ConfigurationBean>();
@@ -51,7 +52,7 @@ public class ConfigurationContext extends AbstractContext {
 						NamedNodeMap configurationAttributesMap=configurationNode.getAttributes();
 						JavaXmlUtil.initializeFromAttributeMap(configurationBean,configurationAttributesMap);
 						Context context=(Context)(this.classLoader.loadClass(configurationBean.getContextClass()).newInstance());
-						logger.log("Context:"+context.getClass().getName()+",id:"+configurationBean.getId()+" is initializing.");
+						logger.info("Context:"+context.getClass().getName()+",id:"+configurationBean.getId()+" is initializing.");
 						if(context instanceof AbstractContext){
 							AbstractContext abstractContext=(AbstractContext)context;
 							abstractContext.setProjectRealPath(this.projectRealPath);

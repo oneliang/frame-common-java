@@ -9,7 +9,8 @@ import com.oneliang.Constant;
 import com.oneliang.frame.bean.Page;
 import com.oneliang.util.common.StringUtil;
 import com.oneliang.util.common.TagUtil;
-import com.oneliang.util.log.Logger;
+import com.oneliang.util.logging.Logger;
+import com.oneliang.util.logging.LoggerManager;
 
 /**
  * @author Dandelion
@@ -21,7 +22,7 @@ public class TableBodyTag extends BodyTagSupport {
 	 */
 	private static final long serialVersionUID = -7892161495680411808L;
 
-	private static final Logger logger=Logger.getLogger(TableBodyTag.class);
+	private static final Logger logger=LoggerManager.getLogger(TableBodyTag.class);
 
 	private String value = null;
 	private String scope = null;

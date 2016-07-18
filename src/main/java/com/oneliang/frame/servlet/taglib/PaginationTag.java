@@ -6,7 +6,8 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
 import com.oneliang.Constant;
 import com.oneliang.frame.bean.Page;
 import com.oneliang.util.common.StringUtil;
-import com.oneliang.util.log.Logger;
+import com.oneliang.util.logging.Logger;
+import com.oneliang.util.logging.LoggerManager;
 
 public class PaginationTag extends BodyTagSupport {
 
@@ -15,7 +16,7 @@ public class PaginationTag extends BodyTagSupport {
 	 */
 	private static final long serialVersionUID = -7387028073417293099L;
 
-	private static final Logger logger=Logger.getLogger(PaginationTag.class);
+	private static final Logger logger=LoggerManager.getLogger(PaginationTag.class);
 
 	private static final String BLANK_2="&nbsp;&nbsp;";
 	private static final String BLANK_8=BLANK_2+BLANK_2+BLANK_2+BLANK_2;

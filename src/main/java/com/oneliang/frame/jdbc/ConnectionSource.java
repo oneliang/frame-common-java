@@ -4,7 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 import com.oneliang.Constant;
-import com.oneliang.util.log.Logger;
+import com.oneliang.util.logging.Logger;
+import com.oneliang.util.logging.LoggerManager;
 import com.oneliang.util.resource.ResourceSource;
 
 /**
@@ -16,7 +17,7 @@ import com.oneliang.util.resource.ResourceSource;
  */
 public class ConnectionSource extends ResourceSource<Connection>{
 
-	private static final Logger logger=Logger.getLogger(ConnectionSource.class);
+	private static final Logger logger=LoggerManager.getLogger(ConnectionSource.class);
 
 	public static final String CONNECTION_SOURCE_NAME="connectionSourceName";
 	public static final String DRIVER="driver";

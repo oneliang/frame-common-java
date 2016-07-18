@@ -27,7 +27,8 @@ import com.oneliang.util.common.JavaXmlUtil;
 import com.oneliang.util.common.ObjectUtil;
 import com.oneliang.util.common.ProxyUtil;
 import com.oneliang.util.common.StringUtil;
-import com.oneliang.util.log.Logger;
+import com.oneliang.util.logging.Logger;
+import com.oneliang.util.logging.LoggerManager;
 
 /**
  * so far,only this context use proxy 
@@ -35,7 +36,7 @@ import com.oneliang.util.log.Logger;
  */
 public class IocContext extends AbstractContext{
 
-	private static final Logger logger=Logger.getLogger(IocContext.class);
+	private static final Logger logger=LoggerManager.getLogger(IocContext.class);
 	
 	protected static final IocConfigurationBean iocConfigurationBean=new IocConfigurationBean();
 	protected static final Map<String,IocBean> iocBeanMap=new ConcurrentHashMap<String,IocBean>();
@@ -245,7 +246,7 @@ public class IocContext extends AbstractContext{
 					iocBean.setProxyInstance(beanInstance);
 				}
 			}
-			logger.log(iocBean.getType()+"<->id:"+iocBeanId+"<->proxy:"+iocBean.getProxyInstance()+"<->instance:"+iocBean.getBeanInstance());
+			logger.info(iocBean.getType()+"<->id:"+iocBeanId+"<->proxy:"+iocBean.getProxyInstance()+"<->instance:"+iocBean.getBeanInstance());
 		}
 	}
 
@@ -321,7 +322,7 @@ public class IocContext extends AbstractContext{
 							Object proxyInstance=iocBean.getProxyInstance();
 							String beanInstanceClassName=beanInstance.getClass().getName();
 							if(parameterClassName.equals(beanInstanceClassName)){
-								logger.log(object.getClass().getName()+"<-"+beanInstance.getClass().getName());
+								logger.info(object.getClass().getName()+"<-"+beanInstance.getClass().getName());
 								method.invoke(object,proxyInstance);
 							}else{
 								Class<?>[] interfaces=beanInstance.getClass().getInterfaces();
@@ -329,7 +330,7 @@ public class IocContext extends AbstractContext{
 									for(Class<?> interfaceClass:interfaces){
 										String beanInstanceClassInterfaceName=interfaceClass.getName();
 										if(parameterClassName.equals(beanInstanceClassInterfaceName)){
-											logger.log(object.getClass().getName()+"<-"+beanInstance.getClass().getName());
+											logger.info(object.getClass().getName()+"<-"+beanInstance.getClass().getName());
 											method.invoke(object,proxyInstance);
 										}
 									}
@@ -358,7 +359,7 @@ public class IocContext extends AbstractContext{
 						IocBean iocBean=iocBeanMap.get(fieldName);
 						if(iocBean!=null){
 							Object proxyInstance=iocBean.getProxyInstance();
-							logger.log(object.getClass().getName()+"<-"+iocBean.getType());
+							logger.info(object.getClass().getName()+"<-"+iocBean.getType());
 							method.invoke(object,proxyInstance);
 						}
 					}
@@ -391,7 +392,7 @@ public class IocContext extends AbstractContext{
 									IocBean referenceObject=iocBeanMap.get(referenceBeanId);
 									if(referenceObject!=null){
 										Object proxyInstance=referenceObject.getProxyInstance();
-										logger.log(iocBean.getType()+"<-"+referenceObject.getType());
+										logger.info(iocBean.getType()+"<-"+referenceObject.getType());
 										method.invoke(beanInstance, proxyInstance);
 									}
 								}

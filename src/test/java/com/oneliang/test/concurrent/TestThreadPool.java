@@ -3,7 +3,8 @@ package com.oneliang.test.concurrent;
 import com.oneliang.frame.log.LoggerContext;
 import com.oneliang.util.concurrent.ThreadPool;
 import com.oneliang.util.concurrent.ThreadTask;
-import com.oneliang.util.log.Logger;
+import com.oneliang.util.logging.Logger;
+import com.oneliang.util.logging.LoggerManager;
 
 public class TestThreadPool {
 
@@ -33,12 +34,7 @@ public class TestThreadPool {
 }
 class TempThreadTask implements ThreadTask{
 
-	/**
-	 * serialVersionUID
-	 */
-	private static final long serialVersionUID = -5158735165442274232L;
-
-	private static final Logger logger=Logger.getLogger(TempThreadTask.class);
+	private static final Logger logger=LoggerManager.getLogger(TempThreadTask.class);
 	
 	private String id=null;
 	
@@ -47,6 +43,6 @@ class TempThreadTask implements ThreadTask{
 	}
 	
 	public void runTask() {
-		logger.log(this.id);
+		logger.info(this.id);
 	}
 }

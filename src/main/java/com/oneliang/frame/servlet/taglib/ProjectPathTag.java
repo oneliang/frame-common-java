@@ -5,7 +5,8 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
 import com.oneliang.Constant;
-import com.oneliang.util.log.Logger;
+import com.oneliang.util.logging.Logger;
+import com.oneliang.util.logging.LoggerManager;
 
 public class ProjectPathTag extends BodyTagSupport {
 
@@ -14,7 +15,7 @@ public class ProjectPathTag extends BodyTagSupport {
 	 */
 	private static final long serialVersionUID = -1688901633941253335L;
 
-	private static final Logger logger=Logger.getLogger(ProjectPathTag.class);
+	private static final Logger logger=LoggerManager.getLogger(ProjectPathTag.class);
 
 	/**
 	 * doStartTag

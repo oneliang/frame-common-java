@@ -12,11 +12,12 @@ import com.oneliang.exception.FileLoadException;
 import com.oneliang.util.common.StringUtil;
 import com.oneliang.util.jar.JarClassLoader;
 import com.oneliang.util.jar.JarUtil;
-import com.oneliang.util.log.Logger;
+import com.oneliang.util.logging.Logger;
+import com.oneliang.util.logging.LoggerManager;
 
 public final class AnnotationContextUtil{
 
-	private static final Logger logger=Logger.getLogger(AnnotationContextUtil.class);
+	private static final Logger logger=LoggerManager.getLogger(AnnotationContextUtil.class);
 
 	private static final String SIGN_ROOT="$ROOT";
 	private static final String PARAMETER_TYPE="-T=";
@@ -104,7 +105,7 @@ public final class AnnotationContextUtil{
 					String className=filePath.substring(classesRealPathFile.getAbsolutePath().length()+1,filePath.length()-(Constant.Symbol.DOT+Constant.File.CLASS).length()).replace(File.separator, Constant.Symbol.DOT);
 					Class<?> clazz=Thread.currentThread().getContextClassLoader().loadClass(className);
 					if(clazz.isAnnotationPresent(annotationClass)){
-						logger.log(clazz);
+						logger.info(clazz);
 						classList.add(clazz);
 					}
 				}

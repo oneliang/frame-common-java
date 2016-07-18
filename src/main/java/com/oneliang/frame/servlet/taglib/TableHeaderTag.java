@@ -6,7 +6,8 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
 import com.oneliang.Constant;
 import com.oneliang.util.common.StringUtil;
 import com.oneliang.util.common.TagUtil;
-import com.oneliang.util.log.Logger;
+import com.oneliang.util.logging.Logger;
+import com.oneliang.util.logging.LoggerManager;
 /**
  * @author Dandelion
  * @since 2008-11-06
@@ -17,7 +18,7 @@ public class TableHeaderTag extends BodyTagSupport{
 	 */
 	private static final long serialVersionUID = 1390170675598454919L;
 
-	private static final Logger logger=Logger.getLogger(TableHeaderTag.class);
+	private static final Logger logger=LoggerManager.getLogger(TableHeaderTag.class);
 
 	private String trString=null;
 	

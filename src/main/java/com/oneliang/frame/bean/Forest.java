@@ -7,11 +7,12 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.oneliang.Constant;
 import com.oneliang.util.common.ObjectUtil;
-import com.oneliang.util.log.Logger;
+import com.oneliang.util.logging.Logger;
+import com.oneliang.util.logging.LoggerManager;
 
 public class Forest<T extends Object> {
 
-	private static final Logger logger=Logger.getLogger(Forest.class);
+	private static final Logger logger=LoggerManager.getLogger(Forest.class);
 
 	protected List<Tree<T>> treeList=new CopyOnWriteArrayList<Tree<T>>();
 

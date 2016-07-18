@@ -9,7 +9,8 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
 import com.oneliang.Constant;
 import com.oneliang.util.common.StringUtil;
 import com.oneliang.util.common.TimeUtil;
-import com.oneliang.util.log.Logger;
+import com.oneliang.util.logging.Logger;
+import com.oneliang.util.logging.LoggerManager;
 
 public class DateFormatTag extends BodyTagSupport {
 
@@ -18,7 +19,7 @@ public class DateFormatTag extends BodyTagSupport {
 	 */
 	private static final long serialVersionUID = 3876792310864662550L;
 
-	private static final Logger logger=Logger.getLogger(DateFormatTag.class);
+	private static final Logger logger=LoggerManager.getLogger(DateFormatTag.class);
 
 	private String value=null;
 	private String originalFormat=null;

@@ -3,8 +3,8 @@ package com.oneliang.frame.jdbc;
 import java.sql.Connection;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Map.Entry;
+import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.oneliang.Constant;
@@ -12,14 +12,15 @@ import com.oneliang.exception.InitializeException;
 import com.oneliang.frame.AbstractContext;
 import com.oneliang.util.common.StringUtil;
 import com.oneliang.util.file.FileUtil;
-import com.oneliang.util.log.Logger;
+import com.oneliang.util.logging.Logger;
+import com.oneliang.util.logging.LoggerManager;
 import com.oneliang.util.resource.ResourcePool;
 import com.oneliang.util.resource.ResourceSource;
 
 @Deprecated
 public class DatabaseContext extends AbstractContext {
 
-	private static final Logger logger=Logger.getLogger(DatabaseContext.class);
+	private static final Logger logger=LoggerManager.getLogger(DatabaseContext.class);
 
 	protected static final Map<String,ResourcePool<Connection>> connectionPoolMap=new ConcurrentHashMap<String,ResourcePool<Connection>>();
 

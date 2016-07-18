@@ -11,14 +11,15 @@ import com.oneliang.Constant;
 import com.oneliang.frame.ConfigurationFactory;
 import com.oneliang.frame.configuration.ConfigurationContext;
 import com.oneliang.util.common.StringUtil;
-import com.oneliang.util.log.Logger;
+import com.oneliang.util.logging.Logger;
+import com.oneliang.util.logging.LoggerManager;
 
 public class ContextListener implements ServletContextListener {
 	
 	/**
 	 * ContextListener constant
 	 */
-	private static final Logger logger=Logger.getLogger(ContextListener.class);
+	private static final Logger logger=LoggerManager.getLogger(ContextListener.class);
 
 //	private static final String CONTEXT_PARAMETER_DBCONFIG="dbConfig";
 	private static final String CONTEXT_PARAMETER_CONFIGFILE="configFile";

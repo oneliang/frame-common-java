@@ -13,11 +13,12 @@ import java.util.List;
 import com.oneliang.frame.ConfigurationFactory;
 import com.oneliang.frame.jdbc.SqlUtil.SqlProcessor;
 import com.oneliang.util.common.ObjectUtil;
-import com.oneliang.util.log.Logger;
+import com.oneliang.util.logging.Logger;
+import com.oneliang.util.logging.LoggerManager;
 
 public class BaseQueryImpl implements BaseQuery {
 	
-	private static final Logger logger=Logger.getLogger(BaseQueryImpl.class);
+	private static final Logger logger=LoggerManager.getLogger(BaseQueryImpl.class);
 	
 	private static final SqlProcessor DEFAULT_SQL_PROCESSOR=new DefaultSqlProcessor();
 	
@@ -44,7 +45,7 @@ public class BaseQueryImpl implements BaseQuery {
 		PreparedStatement preparedStatement=null;
 		try{
 			sql=DatabaseMappingUtil.parseSql(sql);
-			logger.log(sql);
+			logger.info(sql);
 			preparedStatement=connection.prepareStatement(sql);
 			if(parameters!=null){
 				int index=1;
@@ -267,7 +268,7 @@ public class BaseQueryImpl implements BaseQuery {
 		ResultSet resultSet=null;
 		try{
 			sql=DatabaseMappingUtil.parseSql(sql);
-			logger.log(sql);
+			logger.info(sql);
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			if(parameters!=null){
 				int index=1;
@@ -644,7 +645,7 @@ public class BaseQueryImpl implements BaseQuery {
 					break;
 				}
 				sql=DatabaseMappingUtil.parseSql(sql);
-				logger.log(sql);
+				logger.info(sql);
 				if(!customTransaction){
 					connection.setAutoCommit(false);
 				}
@@ -714,7 +715,7 @@ public class BaseQueryImpl implements BaseQuery {
 		int updateResult=0;
 		try{
 			sql=DatabaseMappingUtil.parseSql(sql);
-			logger.log(sql);
+			logger.info(sql);
 			preparedStatement=connection.prepareStatement(sql);
 			if(parameters!=null){
 				int index=1;
@@ -760,7 +761,7 @@ public class BaseQueryImpl implements BaseQuery {
 			statement=connection.createStatement();
 			for(String sql:sqls){
 				sql=DatabaseMappingUtil.parseSql(sql);
-				logger.log(sql);
+				logger.info(sql);
 				statement.addBatch(sql);
 			}
 			results=statement.executeBatch();
@@ -810,7 +811,7 @@ public class BaseQueryImpl implements BaseQuery {
 			}
 			try {
 				sql=DatabaseMappingUtil.parseSql(sql);
-				logger.log(sql);
+				logger.info(sql);
 				if(!customTransaction){
 					connection.setAutoCommit(false);
 				}
