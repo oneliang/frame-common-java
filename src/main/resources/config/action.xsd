@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:schema xmlns:x="http://www.w3.org/2001/XMLSchema">
+	<x:element name="actions">
+		<x:complexType>
+			<x:sequence>
+				<x:element name="action" minOccurs="0" maxOccurs="unbounded">
+					<x:complexType>
+						<x:sequence>
+							<x:element name="interceptor"
+								minOccurs="0" maxOccurs="unbounded">
+								<x:complexType>
+									<x:attribute name="id"
+										type="x:string" use="required">
+									</x:attribute>
+									<x:attribute name="mode" use="required">
+										<x:simpleType>
+											<x:restriction base="x:string">
+												<x:pattern value="before"></x:pattern>
+												<x:pattern value="after"></x:pattern>
+											</x:restriction>
+										</x:simpleType>
+									</x:attribute>
+								</x:complexType>
+							</x:element>
+						</x:sequence>
+						<x:attribute name="id" type="x:string"
+							use="required">
+						</x:attribute>
+						<x:attribute name="path" type="x:string"
+							use="required">
+						</x:attribute>
+						<x:attribute name="type" type="x:string"
+							use="required">
+						</x:attribute>
+					</x:complexType>
+				</x:element>
+			</x:sequence>
+		</x:complexType>
+	</x:element>
+</x:schema>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT mapping (bean*)>
+<!ELEMENT bean (column*)>
+<!ATTLIST bean table CDATA #REQUIRED>
+<!ATTLIST bean type CDATA #REQUIRED>
+<!ELEMENT column EMPTY>
+<!ATTLIST column field CDATA #REQUIRED>
+<!ATTLIST column column CDATA #REQUIRED>
+<!ATTLIST column isId (true) #IMPLIED>

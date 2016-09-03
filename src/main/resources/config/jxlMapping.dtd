@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT jxlMapping (bean*)>
+<!ELEMENT bean (column*)>
+<!ATTLIST bean useFor (import|export) #REQUIRED>
+<!ATTLIST bean type CDATA #REQUIRED>
+<!ELEMENT column EMPTY>
+<!ATTLIST column header CDATA #IMPLIED>
+<!ATTLIST column field CDATA #REQUIRED>
+<!ATTLIST column index CDATA #REQUIRED>

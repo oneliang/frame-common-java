@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT uriMapping (uri*)>
+<!ELEMENT uri EMPTY>
+<!ATTLIST uri from CDATA #REQUIRED>
+<!ATTLIST uri to CDATA #REQUIRED>

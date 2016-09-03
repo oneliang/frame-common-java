@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE uriMapping SYSTEM "uriMapping.dtd">
+<uriMapping>
+	<uri from="/index.html" to="/portal/portalIndex/index.do"/>
+	<uri from="/index_([\d]+).html" to="/portal/portalIndex/index.do?page={0}"/>
+</uriMapping>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE actions SYSTEM "action.dtd">
+<actions>
+	<global-forward name="" path=""/>
+	<global-exception-forward path=""/>
+	<action id="fileUpload" path="fileUpload" type="project.action.FileUploadAction">
+		<interceptor id="testInterceptor" mode="before"/>
+	</action>
+	<action id="fileDownload" path="fileDownload" type="project.action.FileDownloadAction"></action>
+	<action id="cssFile" path="cssFile" type="project.action.CssFileAction"></action>
+	<action id="cssText" path="cssText" type="project.action.CssTextAction"></action>
+	<action id="cssChange" path="cssChange" type="project.action.CssChangeAction"></action>
+</actions>

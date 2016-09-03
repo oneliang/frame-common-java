@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task SYSTEM "task.dtd">
+<task>
+	<processor id="processorOne" type="com.lwx.test.workflow.ProcessorOne"/>
+	<processor id="processorTwo" type="com.lwx.test.workflow.ProcessorTwo"/>
+	<processor id="processorThree" type="com.lwx.test.workflow.ProcessorThree"/>
+	<taskNode id="node1" name="node1" command="node1" processorId="processorOne" isRoot="true">
+		<nextTaskNode id="node2"/>
+	</taskNode>
+	<taskNode id="node2" name="node2" command="node2" processorId="processorTwo">
+		<nextTaskNode id="node3"/>
+	</taskNode>
+	<taskNode id="node3" name="node3" command="node3" processorId="processorThree">
+	</taskNode>
+</task>

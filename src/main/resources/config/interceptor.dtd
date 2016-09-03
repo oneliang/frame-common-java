@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT interceptors (global-interceptor*,interceptor*)>
+<!ELEMENT global-interceptor EMPTY>
+<!ATTLIST global-interceptor id ID #REQUIRED>
+<!ATTLIST global-interceptor type CDATA #REQUIRED>
+<!ATTLIST global-interceptor mode (before|after) #REQUIRED>
+<!ELEMENT interceptor EMPTY>
+<!ATTLIST interceptor id CDATA #REQUIRED>
+<!ATTLIST interceptor type CDATA #REQUIRED>

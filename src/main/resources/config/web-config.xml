@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE config SYSTEM "config.dtd">
+<config>
+	<!-- first initial the LoggerContext -->
+	<configuration id="logger" parameters="/project/config/xml/log.xml"
+		contextClass="com.lwx.frame.context.LoggerContext"/>
+	<configuration id="ioc" contextClass="com.lwx.frame.context.IocContext"
+		parameters="/project/config/xml/ioc.xml" />
+	<configuration id="action"
+		contextClass="com.lwx.frame.context.ActionContext"
+		parameters="-S=common,-F=/project/config/xml/action.xml" />
+	<configuration id="mappingFile"
+		contextClass="com.lwx.frame.context.MappingFileContext"
+		parameters="/project/config/xml/mapping-files.xml" />
+</config>
