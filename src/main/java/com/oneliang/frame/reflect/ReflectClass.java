@@ -32,34 +32,34 @@ public class ReflectClass<C> extends ThrowableChain {
 	/**
 	 * get static field
 	 * 
-	 * @param <FieldClass>
+	 * @param <FieldType>
 	 * @param fieldName
-	 * @return ReflectField<C,FieldClass>
+	 * @return ReflectField<C,FieldType>
 	 */
-	public <FieldClass> ReflectField<C, FieldClass> getStaticField(String fieldName) {
+	public <FieldType> ReflectField<C, FieldType> getStaticField(String fieldName) {
 		return this.getField(fieldName, Modifier.STATIC);
 	}
 
 	/**
 	 * get declared field
 	 * 
-	 * @param <FieldClass>
+	 * @param <FieldType>
 	 * @param fieldName
-	 * @return ReflectField<C,FieldClass>
+	 * @return ReflectField<C,FieldType>
 	 */
-	public <FieldClass> ReflectField<C, FieldClass> getDeclaredField(String fieldName) {
+	public <FieldType> ReflectField<C, FieldType> getDeclaredField(String fieldName) {
 		return this.getField(fieldName, 0);
 	}
 
 	/**
 	 * get field
 	 * 
-	 * @param <FieldClass>
+	 * @param <FieldType>
 	 * @param fieldName
-	 * @return ReflectField<C,FieldClass>
+	 * @return ReflectField<C,FieldType>
 	 */
-	private <FieldClass> ReflectField<C, FieldClass> getField(String fieldName, int modifier) {
-		return new ReflectField<C, FieldClass>(this.clazz, fieldName, modifier);
+	private <FieldType> ReflectField<C, FieldType> getField(String fieldName, int modifier) {
+		return new ReflectField<C, FieldType>(this.clazz, fieldName, modifier);
 	}
 
 	/**
