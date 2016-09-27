@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE interceptors SYSTEM "interceptor.dtd">
+<interceptors>
+	<global-interceptor id="actionInterceptor" type="project.interceptor.ActionInterceptor" mode="before"/>
+	<interceptor id="testInterceptor" type="project.interceptor.TestInterceptor"/>
+</interceptors>

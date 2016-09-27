@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE jxlMapping SYSTEM "jxlMapping.dtd">
+<jxlMapping>
+	<bean useFor="import" type="project.po.CssFile">
+		<column field="id" header="f_id" index="0"/>
+		<column field="recordId" header="f_record_id" index="1"/>
+		<column field="name" header="f_css_file_name" index="2"/>
+		<column field="path" header="f_css_file_path" index="3"/>
+		<column field="createTime" header="f_create_time" index="4"/>
+		<column field="modifyTime" header="f_modify_time" index="5"/>
+		<column field="version" header="f_version" index="6"/>
+		<column field="remark" header="f_remark" index="7"/>
+	</bean>
+	<bean useFor="import" type="project.po.CssText">
+		<column field="id" header="f_id" index="0"/>
+		<column field="recordId" header="f_record_id" index="1"/>
+		<column field="name" header="f_css_name" index="2"/>
+		<column field="text" header="f_css_text" index="3"/>
+		<column field="createTime" header="f_create_time" index="4"/>
+		<column field="modifyTime" header="f_modify_time" index="5"/>
+		<column field="version" header="f_version" index="6"/>
+		<column field="remark" header="f_remark" index="7"/>
+	</bean>
+	<bean useFor="export" type="project.po.Article">
+		<column field="id" header="f_id" index="0"/>
+		<column field="title" header="f_title" index="1"/>
+		<column field="content" header="f_content" index="2"/>
+		<column field="createTime" header="f_create_time" index="3"/>
+		<column field="modifyTime" header="f_modify_time" index="4"/>
+		<column field="remark" header="f_remark" index="5"/>
+	</bean>
+</jxlMapping>

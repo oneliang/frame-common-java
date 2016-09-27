@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT beans (configuration?,bean*)>
+<!ELEMENT configuration EMPTY>
+<!ATTLIST configuration objectInjectType (autoById|autoByType) #REQUIRED>
+<!ELEMENT bean (constructor?,property*,after-inject*)>
+<!ATTLIST bean id ID #REQUIRED>
+<!ATTLIST bean type CDATA #REQUIRED>
+<!ATTLIST bean value CDATA #IMPLIED>
+<!ATTLIST bean proxy (true|false) #IMPLIED>
+<!ATTLIST bean injectType (autoById|autoByType|manual) #IMPLIED>
+<!ELEMENT constructor EMPTY>
+<!ATTLIST constructor types CDATA #REQUIRED>
+<!ATTLIST constructor references CDATA #REQUIRED>
+<!ELEMENT property EMPTY>
+<!ATTLIST property name CDATA #REQUIRED>
+<!ATTLIST property reference CDATA #REQUIRED>
+<!ELEMENT after-inject EMPTY>
+<!ATTLIST after-inject method CDATA #REQUIRED>

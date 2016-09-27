@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT log (default?,error?,level*,output*,logger*)>
+<!ELEMENT default EMPTY>
+<!ATTLIST default level CDATA #REQUIRED>
+<!ATTLIST default output CDATA #REQUIRED>
+<!ATTLIST default pattern CDATA #REQUIRED>
+<!ELEMENT error EMPTY>
+<!ATTLIST error level CDATA #REQUIRED>
+<!ATTLIST error output CDATA #REQUIRED>
+<!ATTLIST error pattern CDATA #REQUIRED>
+<!ELEMENT level EMPTY>
+<!ATTLIST level id ID #REQUIRED>
+<!ATTLIST level priority (0|1|2|3|4|5|6|7|8|9) #REQUIRED>
+<!ATTLIST level pattern CDATA #REQUIRED>
+<!ELEMENT output EMPTY>
+<!ATTLIST output id ID #REQUIRED>
+<!ATTLIST output file CDATA #REQUIRED>
+<!ELEMENT logger (property*)>
+<!ATTLIST logger id ID #REQUIRED>
+<!ATTLIST logger target CDATA #REQUIRED>
+<!ATTLIST logger method CDATA #IMPLIED>
+<!ATTLIST logger debug (true|false) #IMPLIED>
+<!ELEMENT property EMPTY>
+<!ATTLIST property name (level|output) #REQUIRED>
+<!ATTLIST property reference CDATA #REQUIRED>

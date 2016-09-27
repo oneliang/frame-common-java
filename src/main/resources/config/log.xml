@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE log SYSTEM "log.dtd">
+<log>
+	<!-- 
+		%c 输出日志信息所属的类的全名
+		%d 输出日志时间点的日期或时间,可以在其后指定格式,比如:%d{yyyy-MM-dd HH:mm:ss }，输出类似：2002-10-18 22:10:28
+		%f 输出日志信息所属的类的类名
+		%l 输出日志事件的发生位置,即输出日志信息的语句处于它所在的类的第几行
+		%m 输出代码中指定的方法
+		%n 输出一个回车换行符，Windows平台为"\r\n"，Unix平台为"\n"
+		%p 输出优先级,自定义优先级
+		%i 输出信息infomation
+	-->
+	<!-- 数字优先级越高级别越高 -->
+	<!-- 没有设置logger但程序里有用到日志打印的将会打印到default设置的文件里,并打印默认级别 -->
+	<!-- 已设置logger的则按设置的条件打印,没设置打印格式则按默认打印格式,没设置文件则打印到默认文件 -->
+	<default level="DEFAULT" pattern="[%d] [%p] [%c(%f:%l)] [%m] [%i]%n" output="/log/defaultOutput.log"/>
+	<error level="ERROR" pattern="[%d] [%p] [%c(%f:%l)] [%m] [%i]%n" output="/log/errorOutput.log"/>
+	<level id="DEFAULT" priority="0" pattern="[%d] [%p] [%c(%f:%l)] [%m] [%i]%n"/>
+	<level id="INFO" priority="1" pattern="[%d] [%p] [%c(%f:%l)] [%m] [%i]%n"/>
+	<level id="DEBUG" priority="9" pattern="[%d] [%p] [%c(%f:%l)] [%m] [%i]%n"/>
+	<level id="IOCINFO" priority="9" pattern="[%d] [%p] [%i]%n"/>
+	<level id="POOLSTATUS" priority="9" pattern="[%d] [%p] [%c(%f:%l)] [%m] [%i]%n"/>
+	<level id="FILEUPLOAD" priority="9" pattern="[%d] [%p] [%c(%f:%l)] [%m] [%i]%n"/>
+	<!-- <level id="fatal" priority="8" pattern="[%d] [%p] [%c(%f:%l)] [%m] [%i]%n"/> -->
+	<output id="INFO-Output" file="/log/infoOutput.log" />
+	<output id="DEBUG-Output" file="/log/debugOutput.log" />
+	<output id="IOCINFO-Output" file="/log/iocInfoOutput.log"/>
+	<output id="POOLSTATUS-Output" file="/log/poolStatusOutput.log"/>
+	<output id="FILEUPLOAD-Output" file="/log/fileUploadOutput.log"/>
+	<logger id="ActionListenerLogger" target="com.lwx.frame.servlet.ActionListener">
+		<property name="level" reference="DEBUG" />
+		<property name="output" reference="DEBUG-Output" />
+	</logger>
+	<logger id="IocLogger" target="com.lwx.frame.ioc">
+		<property name="level" reference="IOCINFO"/>
+		<property name="output" reference="IOCINFO-Output"/>
+	</logger>
+	<logger id="PoolStatusLogger" target="com.lwx.frame.jdbc.ConnectionPool">
+		<property name="output" reference="POOLSTATUS-Output"/>
+	</logger>
+	<logger id="FileUploadLogger" target="com.lwx.util.common.FileUpload">
+		<property name="output" reference="FILEUPLOAD-Output"/>
+	</logger>
+</log>

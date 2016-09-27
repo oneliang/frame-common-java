@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT config (configuration*)>
+<!ELEMENT configuration EMPTY>
+<!ATTLIST configuration id ID #REQUIRED>
+<!ATTLIST configuration contextClass CDATA #REQUIRED>
+<!ATTLIST configuration parameters CDATA #REQUIRED>

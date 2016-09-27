@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans SYSTEM "ioc.dtd">
+<beans>
+	<configuration objectInjectType="autoById"/>
+	<!-- data source connection type -->
+	<bean id="connector" type="com.lwx.frame.jdbc.ConnectorImpl"></bean>
+	<bean id="baseQuery" type="com.lwx.frame.jdbc.BaseQueryImpl">
+		<property name="connector" reference="connector"/>
+	</bean>
+	<!-- action type -->
+	<bean id="cssFile" type="project.action.CssFileAction">
+		<property name="cssFileLogicImpl" reference="cssFileLogicImpl"/>
+	</bean>
+	<bean id="cssText" type="project.action.CssTextAction">
+		<property name="cssTextLogicImpl" reference="cssTextLogicImpl"/>
+	</bean>
+	<bean id="cssChange" type="project.action.CssChangeAction">
+		<property name="cssFileTextLogicImpl" reference="cssFileTextLogicImpl"/>
+	</bean>
+	<!-- logicImpl type -->
+	<bean id="baseLogicImpl" type="project.logic.impl.BaseLogicImpl">
+		<property name="baseQuery" reference="baseQuery"/>
+		<property name="connector" reference="connector"/>
+	</bean>
+	<bean id="cssFileLogicImpl" type="project.logic.impl.CssFileLogicImpl">
+		<property name="baseQuery" reference="baseQuery"/>
+		<property name="connector" reference="connector"/>
+	</bean>
+	<bean id="cssTextLogicImpl" type="project.logic.impl.CssTextLogicImpl">
+		<property name="baseQuery" reference="baseQuery"/>
+		<property name="connector" reference="connector"/>
+	</bean>
+	<bean id="cssFileTextLogicImpl" type="project.logic.impl.CssFileTextLogicImpl">
+		<property name="baseQuery" reference="baseQuery"/>
+		<property name="connector" reference="connector"/>
+		<property name="cssFileLogicImpl" reference="cssFileLogicImpl"/>
+		<property name="cssTextLogicImpl" reference="cssTextLogicImpl"/>
+	</bean>
+</beans>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT task (processor*,taskNode*)>
+<!ELEMENT processor EMPTY>
+<!ATTLIST processor id ID #REQUIRED>
+<!ATTLIST processor type CDATA #REQUIRED>
+<!ELEMENT taskNode (nextTaskNode*)>
+<!ATTLIST taskNode id ID #REQUIRED>
+<!ATTLIST taskNode name CDATA #REQUIRED>
+<!ATTLIST taskNode command CDATA #REQUIRED>
+<!ATTLIST taskNode processorId CDATA #REQUIRED>
+<!ATTLIST taskNode isRoot (true) #IMPLIED>
+<!ELEMENT nextTaskNode EMPTY>
+<!ATTLIST nextTaskNode id CDATA #REQUIRED>

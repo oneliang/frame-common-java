@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapping SYSTEM "mapping.dtd">
+<mapping>
+	<bean table="t_css_file" type="project.po.CssFile">
+		<column field="id" column="f_id" isId="true"/>
+		<column field="recordId" column="f_record_id"/>
+		<column field="name" column="f_css_file_name"/>
+		<column field="path" column="f_css_file_path"/>
+		<column field="createTime" column="f_create_time"/>
+		<column field="modifyTime" column="f_modify_time"/>
+		<column field="version" column="f_version"/>
+		<column field="remark" column="f_remark"/>
+	</bean>
+	<bean table="t_css_text" type="project.po.CssText">
+		<column field="id" column="f_id" isId="true"/>
+		<column field="recordId" column="f_record_id"/>
+		<column field="name" column="f_css_name"/>
+		<column field="text" column="f_css_text"/>
+		<column field="createTime" column="f_create_time"/>
+		<column field="modifyTime" column="f_modify_time"/>
+		<column field="version" column="f_version"/>
+		<column field="remark" column="f_remark"/>
+	</bean>
+	<bean table="t_article" type="project.po.Article">
+		<column field="id" column="f_id" isId="true"/>
+		<column field="title" column="f_title"/>
+		<column field="content" column="f_content"/>
+		<column field="createTime" column="f_create_time"/>
+		<column field="modifyTime" column="f_modify_time"/>
+		<column field="remark" column="f_remark"/>
+	</bean>
+</mapping>

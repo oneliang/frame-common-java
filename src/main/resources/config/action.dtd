@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT actions (global-forward*,global-exception-forward?,action*)>
+<!ELEMENT global-forward EMPTY>
+<!ATTLIST global-forward name CDATA #REQUIRED>
+<!ATTLIST global-forward path CDATA #REQUIRED>
+<!ELEMENT global-exception-forward EMPTY>
+<!ATTLIST global-exception-forward path CDATA #REQUIRED>
+<!ELEMENT action (interceptor*,forward*)>
+<!ATTLIST action id ID #REQUIRED>
+<!ATTLIST action path CDATA #REQUIRED>
+<!ATTLIST action type CDATA #REQUIRED>
+<!ATTLIST action httpRequestMethods (PUT|DELETE|GET|POST|HEAD|OPTIONS|TRACE) #IMPLIED>
+<!ELEMENT interceptor EMPTY>
+<!ATTLIST interceptor id CDATA #REQUIRED>
+<!ATTLIST interceptor mode (before|after) #REQUIRED>
+<!ELEMENT forward EMPTY>
+<!ATTLIST forward name CDATA #REQUIRED>
+<!ATTLIST forward path CDATA #REQUIRED>
+<!ATTLIST forward staticParameters CDATA #IMPLIED>
+<!ATTLIST forward staticFilePath CDATA #IMPLIED>
