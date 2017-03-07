@@ -1,4 +1,9 @@
-package is define for function or module(such as exception,classloader,package-util can put in the same package)
-public package for frame,such as:
-com.lwx.java.exception
-com.lwx.java.util
+com.oneliang.exception
+com.oneliang.util
+com.oneliang.frame
+com.oneliang.android
+com.oneliang.tools.builder
+com.oneliang.tools.autodex
+com.oneliang.tools.dex
+com.oneliang.tools.linearalloc
+com.oneliang.app
