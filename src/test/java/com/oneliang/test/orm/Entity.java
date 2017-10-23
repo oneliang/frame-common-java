@@ -23,8 +23,15 @@ public @interface Entity {
 
         boolean isId() default false;
 
-        int length() default 0;
+        Condition[] condition();
 
-        String condition() default StringUtil.BLANK;
+        @Documented
+        @Target(ElementType.FIELD)
+        @Retention(RetentionPolicy.RUNTIME)
+        public @interface Condition {
+            String key();
+
+            String value();
+        }
     }
 }

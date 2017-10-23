@@ -2,6 +2,8 @@ package com.oneliang.test.orm;
 
 import java.util.List;
 
+import com.oneliang.test.orm.Entity.Column;
+
 public interface BaseDatabaseOperate {
 
     /**
@@ -11,15 +13,22 @@ public interface BaseDatabaseOperate {
      */
     public abstract void createDatabase(String databaseName);
 
-    public abstract void createTable(String tableName, List<Column> columnList);
+    /**
+     * create table
+     * 
+     * @param tableName
+     * @param columnWrapperList
+     */
+    public abstract void createTable(String tableName, List<ColumnWrapper> columnWrapperList);
 
-    public static class Column {
-        public final String name;
-        public final boolean isId;
+    public static class ColumnWrapper {
+        public final String fieldName;
+        public final Column column;
 
-        public Column(String name, boolean isId) {
-            this.name = name;
-            this.isId = isId;
+        public ColumnWrapper(String fieldName, Column column) {
+            this.fieldName = fieldName;
+            this.column = column;
         }
     }
+
 }

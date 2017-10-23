@@ -1,8 +1,9 @@
 package com.oneliang.test.orm;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.oneliang.Constant;
 import com.oneliang.util.common.StringUtil;
 import com.oneliang.util.logging.Logger;
 import com.oneliang.util.logging.LoggerManager;
@@ -96,51 +97,17 @@ public abstract class DatabaseOperator implements DatabaseOperate {
             return;
         }
         logger.info(String.format("Reading entity:%s,table:%s", clazz, table));
-        StringBuilder columnStringBuilder = new StringBuilder();
-        StringBuilder primaryKeyStringBuilder = new StringBuilder();
+        List<ColumnWrapper> columnWrapperList = new ArrayList<ColumnWrapper>();
         for (Field entityField : entityFieldArray) {
             Entity.Column[] columnAnnotationArray = entityField.getAnnotationsByType(Entity.Column.class);
             if (columnAnnotationArray == null || columnAnnotationArray.length == 0) {
                 continue;
             }
-            Entity.Column columnAnnotation = columnAnnotationArray[0];
-            boolean isId = columnAnnotation.isId();
-            String columnName = columnAnnotation.name();
             String fieldName = entityField.getName();
-            if (StringUtil.isBlank(columnName)) {
-                columnName = fieldName;
-            }
-            Class<?> fieldType = entityField.getType();
-            String columnType = null;
-            if (databaseMapper == null) {
-                columnType = fieldType.getSimpleName();
-            } else {
-                columnType = databaseMapper.getType(fieldType);
-            }
-            columnStringBuilder.append("");
-            if (isId) {
-                if (primaryKeyStringBuilder.length() > 0) {
-                    primaryKeyStringBuilder.append(Constant.Symbol.COMMA);
-                }
-                primaryKeyStringBuilder.append(columnName);
-            }
-            columnStringBuilder.append(columnName + " " + columnType + "(20),");
-            logger.info(String.format("Reading entity column,field name:%s,field type:%s,column name:%s,column type:%s", fieldName, fieldType, columnName, columnType));
+            Entity.Column columnAnnotation = columnAnnotationArray[0];
+            columnWrapperList.add(new ColumnWrapper(fieldName, columnAnnotation));
         }
-        if (columnStringBuilder.length() > 0) {
-            columnStringBuilder.delete(columnStringBuilder.length() - 1, columnStringBuilder.length());
-        }
-        StringBuilder sqlStringBuilder = new StringBuilder();
-        sqlStringBuilder.append("CREATE TABLE " + table + "(");
-        sqlStringBuilder.append(columnStringBuilder);
-        if (StringUtil.isNotBlank(primaryKeyStringBuilder.toString())) {
-            columnStringBuilder.append(",PRIMARY KEY(");
-            columnStringBuilder.append(primaryKeyStringBuilder);
-            columnStringBuilder.append(")");
-            sqlStringBuilder.append(columnStringBuilder);
-        }
-        sqlStringBuilder.append(")");
-        logger.info(sqlStringBuilder);
+        this.createTable(table, columnWrapperList);
     }
 
     /**
