@@ -6,7 +6,7 @@ import java.util.List;
 import com.oneliang.Constant;
 import com.oneliang.test.protocol.ProtocolTemplateBean.Field;
 import com.oneliang.util.generate.Template;
-import com.oneliang.util.generate.Template.TemplateParameter;
+import com.oneliang.util.generate.Template.Parameter;
 
 public class ProtocolGenerate {
 
@@ -14,7 +14,7 @@ public class ProtocolGenerate {
 		final String templateFile = "/D:/Dandelion/java/workspace/frame-common-java/src/com/lwx/test/protocol/protocol.tmpl";
 		final String toDirectory = "/D:/Dandelion/java/workspace/frame-common-java/src/";
 		Template template = new Template();
-		TemplateParameter templateParameter = new TemplateParameter();
+        Parameter parameter = new Parameter();
 		ProtocolTemplateBean bean = new ProtocolTemplateBean();
 		bean.setClassName("Protocol");
 		bean.setPackageName("com.lwx.test.protocol");
@@ -89,10 +89,10 @@ public class ProtocolGenerate {
 		field.setByteCount(1);
 		fieldList.add(field);
 		bean.setFieldList(fieldList);
-		templateParameter.setTemplateFile(templateFile);
-		templateParameter.setToFile(toDirectory + bean.getPackageName().replace(Constant.Symbol.DOT, Constant.Symbol.SLASH_LEFT) + Constant.Symbol.SLASH_LEFT + bean.getClassName() + ".java");
-		templateParameter.setObject(bean);
-		System.out.println(templateParameter.getToFile());
-		template.generate(templateParameter);
+		parameter.setTemplateFile(templateFile);
+		parameter.setToFile(toDirectory + bean.getPackageName().replace(Constant.Symbol.DOT, Constant.Symbol.SLASH_LEFT) + Constant.Symbol.SLASH_LEFT + bean.getClassName() + ".java");
+		parameter.setObject(bean);
+		System.out.println(parameter.getToFile());
+		template.generate(parameter);
 	}
 }
