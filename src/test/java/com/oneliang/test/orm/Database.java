@@ -13,5 +13,7 @@ public @interface Database {
 
     String name();
 
-    Class<?>[] entities() default {};
+    Class<?>[] entities();
+
+    Class<?>[] daos();
 }

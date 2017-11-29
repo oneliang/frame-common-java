@@ -59,7 +59,7 @@ public class JsonTree<T extends Object> extends Tree<T> {
 			String fieldName=entry.getValue();
 			Object methodReturnValue=ObjectUtil.getterOrIsMethodInvoke(object, fieldName);
 			if(jsonProcessor!=null){
-				methodReturnValue=jsonProcessor.process(fieldName,methodReturnValue,false);
+				methodReturnValue=jsonProcessor.process(null, fieldName,methodReturnValue,false);
 			}
 			stringBuilder.append(Constant.Symbol.DOUBLE_QUOTES+key+Constant.Symbol.DOUBLE_QUOTES+Constant.Symbol.COLON+methodReturnValue.toString());
             if(iterator.hasNext()){

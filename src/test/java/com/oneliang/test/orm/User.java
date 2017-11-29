@@ -3,7 +3,7 @@ package com.oneliang.test.orm;
 import com.oneliang.Constant;
 import com.oneliang.test.orm.Entity.Column;
 
-@Entity
+@Entity(table = "t_user")
 public class User {
 
     @Column(isId = true, condition = { @Column.Condition(key = Constant.Database.MYSQL, value = "varchar(40) NOT NULL DEFAULT ''") })

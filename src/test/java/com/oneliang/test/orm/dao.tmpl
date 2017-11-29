@@ -1,0 +1,12 @@
+package <%=packageName%>;
+
+public class <%=className%>{
+	
+	<%for(var i=0;i<methodList.length;i++){%>
+	<%var method=methodList[i];%>
+	public <%=method.returnType%> <%=method.name%>(){
+		String sql="<%=method.sql%>";
+		return null;
+	}
+	<%}%>
+} 

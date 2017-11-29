@@ -32,6 +32,13 @@ public interface DatabaseOperate extends BaseDatabaseOperate {
     public abstract void createTable(Class<?> clazz, final String tableName);
 
     /**
+     * create dao
+     * 
+     * @param clazz
+     */
+    public abstract void createDao(Class<?> clazz);
+
+    /**
      * destroy database
      * 
      * @param clazz

@@ -62,6 +62,13 @@ public abstract class DatabaseOperator implements DatabaseOperate {
             this.createTable(entityClass);
         }
 
+        Class<?>[] daoClassArray = database.daos();
+        if (daoClassArray == null || daoClassArray.length == 0) {
+            return;
+        }
+        for (Class<?> daoClass : daoClassArray) {
+            this.createDao(daoClass);
+        }
     }
 
     /**
@@ -108,6 +115,15 @@ public abstract class DatabaseOperator implements DatabaseOperate {
             columnWrapperList.add(new ColumnWrapper(fieldName, columnAnnotation));
         }
         this.createTable(table, columnWrapperList);
+    }
+
+    /**
+     * create dao
+     * 
+     * @param clazz
+     */
+    public void createDao(Class<?> clazz) {
+
     }
 
     /**
