@@ -10,6 +10,7 @@ import java.util.zip.GZIPInputStream;
 import com.oneliang.Constant;
 import com.oneliang.util.file.FileUtil;
 import com.oneliang.util.http.HttpUtil;
+import com.oneliang.util.http.HttpUtil.AdvancedOption;
 import com.oneliang.util.http.HttpUtil.Callback;
 import com.oneliang.util.http.HttpUtil.HttpNameValue;
 
@@ -23,8 +24,20 @@ public final class CollectUtil {
      * @return ByteArrayOutputStream
      */
     public static ByteArrayOutputStream collectFromHttp(String httpUrl, List<HttpNameValue> httpHeaderList) {
+        return collectFromHttp(httpUrl, httpHeaderList, null);
+    }
+
+    /**
+     * collect from http
+     * 
+     * @param httpUrl
+     * @param httpHeaderList
+     * @param advancedOption
+     * @return ByteArrayOutputStream
+     */
+    public static ByteArrayOutputStream collectFromHttp(String httpUrl, List<HttpNameValue> httpHeaderList, AdvancedOption advancedOption) {
         final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        HttpUtil.sendRequestGet(httpUrl, httpHeaderList, new Callback() {
+        HttpUtil.sendRequestGet(httpUrl, httpHeaderList, advancedOption, new Callback() {
             public void httpOkCallback(Map<String, List<String>> headerFieldMap, InputStream inputStream, int contentLength) throws Exception {
                 boolean needToUnzip = false;
                 if (headerFieldMap != null && headerFieldMap.containsKey(Constant.Http.HeaderKey.CONTENT_ENCODING)) {
