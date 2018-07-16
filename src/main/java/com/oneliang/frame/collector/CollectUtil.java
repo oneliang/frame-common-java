@@ -13,8 +13,12 @@ import com.oneliang.util.http.HttpUtil;
 import com.oneliang.util.http.HttpUtil.AdvancedOption;
 import com.oneliang.util.http.HttpUtil.Callback;
 import com.oneliang.util.http.HttpUtil.HttpNameValue;
+import com.oneliang.util.logging.Logger;
+import com.oneliang.util.logging.LoggerManager;
 
 public final class CollectUtil {
+
+    private static final Logger logger = LoggerManager.getLogger(CollectUtil.class);
 
     /**
      * collect from http
@@ -58,9 +62,11 @@ public final class CollectUtil {
 
             public void exceptionCallback(Exception exception) {
                 exception.printStackTrace();
+                logger.error(Constant.Base.EXCEPTION, exception);
             }
 
             public void httpNotOkCallback(int responseCode, Map<String, List<String>> headerFieldMap) throws Exception {
+                logger.error(String.format("response not ok, http:%s, response code:%s", httpUrl, responseCode));
             }
         });
         return byteArrayOutputStream;
