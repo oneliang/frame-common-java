@@ -14,7 +14,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.util.common.Encoder;
 import com.oneliang.util.common.StringUtil;
 
@@ -105,10 +105,10 @@ public class SessionFilter implements Filter {
 			uri=uri.substring(front);
 			String params=mapToParameter(request.getParameterMap());
 			String errorForwardUrl=this.errorForward;
-			if(errorForwardUrl.indexOf(Constant.Symbol.QUESTION_MARK)>0){
-				errorForwardUrl=this.errorForward+Constant.Symbol.AND+Constant.RequestParameter.RETURN_URL+Constant.Symbol.EQUAL+uri+QUESTION_ENCODE+params;
+			if(errorForwardUrl.indexOf(Constants.Symbol.QUESTION_MARK)>0){
+				errorForwardUrl=this.errorForward+Constants.Symbol.AND+Constants.RequestParameter.RETURN_URL+Constants.Symbol.EQUAL+uri+QUESTION_ENCODE+params;
 			}else{
-				errorForwardUrl=this.errorForward+Constant.Symbol.QUESTION_MARK+Constant.RequestParameter.RETURN_URL+Constant.Symbol.EQUAL+uri+QUESTION_ENCODE+params;
+				errorForwardUrl=this.errorForward+Constants.Symbol.QUESTION_MARK+Constants.RequestParameter.RETURN_URL+Constants.Symbol.EQUAL+uri+QUESTION_ENCODE+params;
 			}
 			httpRequest.getRequestDispatcher(errorForwardUrl).forward(request, response);
 		}

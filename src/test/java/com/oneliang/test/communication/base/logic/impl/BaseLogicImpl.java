@@ -4,7 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.frame.ioc.Ioc;
 import com.oneliang.test.communication.base.logic.BaseLogic;
 import com.oneliang.test.communication.base.protocol.TcpPacket;
@@ -31,10 +31,10 @@ public class BaseLogicImpl implements BaseLogic {
             int offset = 0;
             int last = totalLength;
             while (last > 0) {
-                if (last >= Constant.Capacity.BYTES_PER_KB) {
-                    outputStream.write(byteArray, offset, Constant.Capacity.BYTES_PER_KB);
+                if (last >= Constants.Capacity.BYTES_PER_KB) {
+                    outputStream.write(byteArray, offset, Constants.Capacity.BYTES_PER_KB);
                     outputStream.flush();
-                    offset += Constant.Capacity.BYTES_PER_KB;
+                    offset += Constants.Capacity.BYTES_PER_KB;
                     last = totalLength - offset;
                 } else {
                     outputStream.write(byteArray, offset, last);
@@ -118,7 +118,7 @@ public class BaseLogicImpl implements BaseLogic {
             byte[] bodyLengthByteArray = new byte[8];
             inputStream.read(bodyLengthByteArray, 0, bodyLengthByteArray.length);
             long bodyLength = MathUtil.byteArrayToLong(bodyLengthByteArray);
-            byte[] buffer = new byte[Constant.Capacity.BYTES_PER_KB];
+            byte[] buffer = new byte[Constants.Capacity.BYTES_PER_KB];
             long last = bodyLength;
             while (last > 0) {
                 int length = inputStream.read(buffer, 0, buffer.length);

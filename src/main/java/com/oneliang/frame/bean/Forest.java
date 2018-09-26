@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.util.common.ObjectUtil;
 import com.oneliang.util.logging.Logger;
 import com.oneliang.util.logging.LoggerManager;
@@ -30,7 +30,7 @@ public class Forest<T extends Object> {
 		try {
 			for (T object : list) {
 				if(fartherFieldName!=null&&fartherFieldName.length()>0){
-					String fartherMethodName=ObjectUtil.fieldNameToMethodName(Constant.Method.PREFIX_GET, fartherFieldName);
+					String fartherMethodName=ObjectUtil.fieldNameToMethodName(Constants.Method.PREFIX_GET, fartherFieldName);
 					Method fartherMethod=object.getClass().getMethod(fartherMethodName,new Class[]{});
 					Object value = fartherMethod.invoke(object, new Object[]{});
 					if (Tree.checkValue(value, fartherValueSet)) {
@@ -40,7 +40,7 @@ public class Forest<T extends Object> {
 				}
 			}
 		} catch (Exception e) {
-			logger.error(Constant.Base.EXCEPTION, e);
+			logger.error(Constants.Base.EXCEPTION, e);
 		}
 		return treeRootList;
 	}

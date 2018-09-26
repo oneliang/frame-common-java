@@ -2,7 +2,7 @@ package com.oneliang.frame.bean;
 
 import java.util.List;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 
 public class ExtForest<T extends Object> extends Forest<T> {
 
@@ -38,10 +38,10 @@ public class ExtForest<T extends Object> extends Forest<T> {
 		for(Tree<T> tree:this.treeList){
 			string.append(((ExtTree<T>)tree).generateJsonTree(idField, textField, hrefField,hrefTarget));
 			if(index<lastIndex){
-				string.append(Constant.Symbol.COMMA);
+				string.append(Constants.Symbol.COMMA);
 			}
 			index++;
 		}
-		return Constant.Symbol.MIDDLE_BRACKET_LEFT+string.toString()+Constant.Symbol.MIDDLE_BRACKET_RIGHT;
+		return Constants.Symbol.MIDDLE_BRACKET_LEFT+string.toString()+Constants.Symbol.MIDDLE_BRACKET_RIGHT;
 	}
 }

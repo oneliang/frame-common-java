@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.exception.MappingNotFoundException;
 import com.oneliang.util.common.ObjectUtil;
 import com.oneliang.util.common.StringUtil;
@@ -46,8 +46,8 @@ public final class SqlUtil{
 					for (Method method:methods) {
 						String methodName=method.getName();
 						String fieldName=null;
-						if(methodName.startsWith(Constant.Method.PREFIX_SET)){
-							fieldName=ObjectUtil.methodNameToFieldName(Constant.Method.PREFIX_SET, methodName);
+						if(methodName.startsWith(Constants.Method.PREFIX_SET)){
+							fieldName=ObjectUtil.methodNameToFieldName(Constants.Method.PREFIX_SET, methodName);
 						}
 						if(fieldName!=null){
 							String columnName = mappingBean.getColumn(fieldName);
@@ -85,11 +85,11 @@ public final class SqlUtil{
 		StringBuilder selectColumn=new StringBuilder();
 		if(columns!=null&&columns.length>0){
 			for(String column:columns){
-				selectColumn.append(column+Constant.Symbol.COMMA);
+				selectColumn.append(column+Constants.Symbol.COMMA);
 			}
 			selectColumn=selectColumn.delete(selectColumn.length()-1,selectColumn.length());
 		}else{
-			selectColumn.append(Constant.Symbol.WILDCARD);
+			selectColumn.append(Constants.Symbol.WILDCARD);
 		}
 		condition=StringUtil.nullToBlank(condition);
 		StringBuilder sql=new StringBuilder();
@@ -262,7 +262,7 @@ public final class SqlUtil{
 									break;
 								case MULTIPLE_ROW:
 									String id=JsonUtil.baseArrayToJson(ids);
-									id=id.replaceAll("^\\"+Constant.Symbol.MIDDLE_BRACKET_LEFT, "").replaceAll("\\"+Constant.Symbol.MIDDLE_BRACKET_RIGHT+"$", "");
+									id=id.replaceAll("^\\"+Constants.Symbol.MIDDLE_BRACKET_LEFT, "").replaceAll("\\"+Constants.Symbol.MIDDLE_BRACKET_RIGHT+"$", "");
 									condition.append(" AND "+columnName+" IN ("+id+")");
 									break;
 								}
@@ -353,17 +353,17 @@ public final class SqlUtil{
 						if(fieldName!=null){
 							String columnName=mappingBean.getColumn(fieldName);
 							if (columnName!=null) {
-								columnNames.append(columnName+Constant.Symbol.COMMA);
+								columnNames.append(columnName+Constants.Symbol.COMMA);
 								Class<?> type=method.getReturnType();
 								Object value = method.invoke(object,new Object[]{});
 								if(sqlProcessor!=null){
-									values.append(sqlProcessor.beforeInsertProcess(type, value)+Constant.Symbol.COMMA);
+									values.append(sqlProcessor.beforeInsertProcess(type, value)+Constants.Symbol.COMMA);
 								}else{
 									if(value!=null){
 										values.append("'"+value.toString()+"'");
-										values.append(Constant.Symbol.COMMA);
+										values.append(Constants.Symbol.COMMA);
 									}else{
-										values.append(StringUtil.NULL+Constant.Symbol.COMMA);
+										values.append(StringUtil.NULL+Constants.Symbol.COMMA);
 									}
 								}
 							}
@@ -530,7 +530,7 @@ public final class SqlUtil{
 		if(annotationMappingBean!=null){
 			String table=annotationMappingBean.getTable();
 			if(annotationMappingBean.isDropIfExist()){
-				sqlList.add("DROP TABLE IF EXISTS "+table+Constant.Symbol.SEMICOLON);
+				sqlList.add("DROP TABLE IF EXISTS "+table+Constants.Symbol.SEMICOLON);
 			}
 			StringBuilder createTableSql=new StringBuilder();
 			createTableSql.append("CREATE TABLE "+table+" (");
@@ -540,17 +540,17 @@ public final class SqlUtil{
 					if(mappingColumnBean instanceof AnnotationMappingColumnBean){
 						AnnotationMappingColumnBean annotationMappingColumnBean=(AnnotationMappingColumnBean)mappingColumnBean;
 						createTableSql.append(annotationMappingColumnBean.getColumn());
-						createTableSql.append(" "+annotationMappingColumnBean.getCondition()+Constant.Symbol.COMMA);
+						createTableSql.append(" "+annotationMappingColumnBean.getCondition()+Constants.Symbol.COMMA);
 						if(annotationMappingColumnBean.getIsId()){
 							createTableSql.append("PRIMARY KEY ("+annotationMappingColumnBean.getColumn()+")");
-							createTableSql.append(Constant.Symbol.COMMA);
+							createTableSql.append(Constants.Symbol.COMMA);
 						}
 					}
 				}
 				createTableSql.delete(createTableSql.length()-1, createTableSql.length());
 			}
 			createTableSql.append(") "+annotationMappingBean.getCondition());
-			createTableSql.append(Constant.Symbol.SEMICOLON);
+			createTableSql.append(Constants.Symbol.SEMICOLON);
 			sqlList.add(createTableSql.toString());
 		}
 		String[] sqls=sqlList.toArray(new String[sqlList.size()]);

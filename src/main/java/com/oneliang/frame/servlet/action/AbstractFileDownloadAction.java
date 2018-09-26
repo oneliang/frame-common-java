@@ -9,7 +9,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.StaticVar;
 import com.oneliang.frame.servlet.ActionUtil;
 
@@ -36,17 +36,17 @@ public abstract class AbstractFileDownloadAction extends CommonAction{
 	 */
 	protected boolean download(ServletRequest request,ServletResponse response,String filename) throws ActionExecuteException{
 		boolean result=false;
-		response.setContentType(Constant.Http.ContentType.APPLICATION_X_DOWNLOAD);
+		response.setContentType(Constants.Http.ContentType.APPLICATION_X_DOWNLOAD);
 		String filePath=StaticVar.DOWNLOAD_FOLDER+filename;
 		InputStream inputStream=null;
 		OutputStream outputStream=null;
 		try {
 			
-			String newFilename=new String(filename.getBytes(Constant.Encoding.GB2312),Constant.Encoding.ISO88591);
-			((HttpServletResponse)response).addHeader(Constant.Http.HeaderKey.CONTENT_DISPOSITION, "attachment;filename="+ newFilename);
+			String newFilename=new String(filename.getBytes(Constants.Encoding.GB2312),Constants.Encoding.ISO88591);
+			((HttpServletResponse)response).addHeader(Constants.Http.HeaderKey.CONTENT_DISPOSITION, "attachment;filename="+ newFilename);
 			outputStream=response.getOutputStream();
 			inputStream=new FileInputStream(filePath);
-			byte[] buffer=new byte[Constant.Capacity.BYTES_PER_KB];
+			byte[] buffer=new byte[Constants.Capacity.BYTES_PER_KB];
 			int length=-1;
 			while((length=inputStream.read(buffer,0,buffer.length))!=-1){
 				outputStream.write(buffer,0,length);

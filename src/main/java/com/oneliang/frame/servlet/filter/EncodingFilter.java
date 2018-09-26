@@ -9,7 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 /**
  * <p>
  * Class: EncodingFilter class
@@ -22,7 +22,7 @@ import com.oneliang.Constant;
  */
 public class EncodingFilter implements Filter {
 	
-	private static final String DEFAULT_ENCODING=Constant.Encoding.UTF8;
+	private static final String DEFAULT_ENCODING=Constants.Encoding.UTF8;
 	private static final String ENCODING="encoding";
 	private static final String IGNORE="ignore";
 	

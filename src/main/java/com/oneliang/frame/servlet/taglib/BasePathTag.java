@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.util.logging.Logger;
 import com.oneliang.util.logging.LoggerManager;
 
@@ -23,11 +23,11 @@ public class BasePathTag extends BodyTagSupport {
 	public int doStartTag() throws JspException{
 		HttpServletRequest request=(HttpServletRequest)pageContext.getRequest();
 		String path = request.getContextPath();
-		String basePath = request.getScheme() + Constant.Symbol.COLON+Constant.Symbol.SLASH_LEFT+Constant.Symbol.SLASH_LEFT+request.getServerName() + Constant.Symbol.COLON + request.getServerPort()+ path+Constant.Symbol.SLASH_LEFT;
+		String basePath = request.getScheme() + Constants.Symbol.COLON+Constants.Symbol.SLASH_LEFT+Constants.Symbol.SLASH_LEFT+request.getServerName() + Constants.Symbol.COLON + request.getServerPort()+ path+Constants.Symbol.SLASH_LEFT;
 		try {
 			pageContext.getOut().print(basePath);
 		} catch (Exception e) {
-			logger.error(Constant.Base.EXCEPTION, e);
+			logger.error(Constants.Base.EXCEPTION, e);
 		}
 		return EVAL_PAGE;
 	}

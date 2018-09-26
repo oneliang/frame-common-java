@@ -3,7 +3,7 @@ package com.oneliang.test.concurrent;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.util.logging.Logger;
 import com.oneliang.util.logging.LoggerManager;
 
@@ -67,7 +67,7 @@ public class TimeoutThread implements Runnable {
                 logger.verbose("need to interrupt:" + e.getMessage());
                 Thread.currentThread().interrupt();
             } catch (Exception e) {
-                logger.error(Constant.Base.EXCEPTION, e);
+                logger.error(Constants.Base.EXCEPTION, e);
             }
             lastLoopTime = System.currentTimeMillis();
         }

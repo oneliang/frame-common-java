@@ -12,7 +12,7 @@ import java.util.Queue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.exception.InitializeException;
 import com.oneliang.frame.AbstractContext;
 import com.oneliang.util.common.StringUtil;
@@ -56,12 +56,12 @@ public class TextContext extends AbstractContext{
 				}else if(file.isFile()){
 					if(filename.endsWith(TEXT_SUFFIX)){
 						String key=filename.substring(0, filename.lastIndexOf(TEXT_SUFFIX));
-						BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(new FileInputStream(file),Constant.Encoding.UTF8));
+						BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(new FileInputStream(file),Constants.Encoding.UTF8));
 						String line=null;
 						List<Option> optionList=new ArrayList<Option>();
 						Map<String,Option> optionMap=new HashMap<String,Option>();
 						while((line=bufferedReader.readLine())!=null){
-							String[] arrays=line.split(Constant.Symbol.EQUAL);
+							String[] arrays=line.split(Constants.Symbol.EQUAL);
 							if(arrays.length>=2){
 								Option option=new Option();
 								option.setLabel(arrays[0]);

@@ -6,7 +6,7 @@ import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.frame.jdbc.ConnectionSource;
 import com.oneliang.util.common.StringUtil;
 import com.oneliang.util.generate.Template;
@@ -55,8 +55,8 @@ public class Test {
         daoBean.setMethodList(methodList);
         daoBean.setPackageName("com.oneliang.test.orm");
         daoBean.setClassName("UserDaoImpl");
-        String templateFile = projectRealPath + Constant.Symbol.SLASH_LEFT + "src/test/java/com/oneliang/test/orm/dao.tmpl";
-        String toFile = projectRealPath + Constant.Symbol.SLASH_LEFT + "src/test/java/" + daoBean.getPackageName().replace(Constant.Symbol.DOT, Constant.Symbol.SLASH_LEFT) + Constant.Symbol.SLASH_LEFT + daoBean.getClassName() + Constant.Symbol.DOT + Constant.File.JAVA;
+        String templateFile = projectRealPath + Constants.Symbol.SLASH_LEFT + "src/test/java/com/oneliang/test/orm/dao.tmpl";
+        String toFile = projectRealPath + Constants.Symbol.SLASH_LEFT + "src/test/java/" + daoBean.getPackageName().replace(Constants.Symbol.DOT, Constants.Symbol.SLASH_LEFT) + Constants.Symbol.SLASH_LEFT + daoBean.getClassName() + Constants.Symbol.DOT + Constants.File.JAVA;
         parameter.setTemplateFile(templateFile);
         parameter.setToFile(toFile);
         parameter.setObject(daoBean);

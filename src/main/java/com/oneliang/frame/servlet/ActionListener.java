@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.frame.ConfigurationFactory;
 import com.oneliang.frame.configuration.ConfigurationContext;
 import com.oneliang.frame.servlet.action.Action.RequestMapping.RequestParameter;
@@ -198,34 +198,34 @@ public class ActionListener extends HttpServlet{
 								}
 							}else{
 								logger.info("Can not through the before action interceptors");
-								response.sendError(Constant.Http.StatusCode.FORBIDDEN);
+								response.sendError(Constants.Http.StatusCode.FORBIDDEN);
 							}
 						}else{
 							logger.info("Method not allowed,http request method:"+httpRequestMethod);
-							response.sendError(Constant.Http.StatusCode.METHOD_NOT_ALLOWED);
+							response.sendError(Constants.Http.StatusCode.METHOD_NOT_ALLOWED);
 						}
 					}else{
 						logger.info("The request name--:"+uri+" is not exist,please config the name and entity class");
-						response.sendError(Constant.Http.StatusCode.NOT_FOUND);
+						response.sendError(Constants.Http.StatusCode.NOT_FOUND);
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
-					logger.error(Constant.Base.EXCEPTION, e);
+					logger.error(Constants.Base.EXCEPTION, e);
 					logger.info("Action or page is not exist");
 					String exceptionPath=ConfigurationFactory.getGlobalExceptionForwardPath();
 					if(exceptionPath!=null){
-						request.setAttribute(Constant.Base.EXCEPTION, e);
+						request.setAttribute(Constants.Base.EXCEPTION, e);
 						RequestDispatcher requestDispatcher=request.getRequestDispatcher(exceptionPath);
 						requestDispatcher.forward(request,response);
 						logger.info("Forward to exception path:"+exceptionPath);
 					}else{
 						logger.info("System can not find the exception path.Please config the global exception forward path.");
-						response.sendError(Constant.Http.StatusCode.INTERNAL_SERVER_ERROR);
+						response.sendError(Constants.Http.StatusCode.INTERNAL_SERVER_ERROR);
 					}
 				}
 			}else{
 				logger.info("Can not through the before global interceptors");
-				response.sendError(Constant.Http.StatusCode.FORBIDDEN);
+				response.sendError(Constants.Http.StatusCode.FORBIDDEN);
 			}
 		}
 
@@ -254,7 +254,7 @@ public class ActionListener extends HttpServlet{
 					this.classProcessor=(ClassProcessor)clazz.newInstance();
 				}
 			} catch (Exception e) {
-				logger.error(Constant.Base.EXCEPTION, e);
+				logger.error(Constants.Base.EXCEPTION, e);
 			}
 		}
 	}
@@ -507,7 +507,7 @@ public class ActionListener extends HttpServlet{
 					}
 				}
 			}catch(Exception e){
-				logger.error(Constant.Base.EXCEPTION,e);
+				logger.error(Constants.Base.EXCEPTION,e);
 				interceptorSign=false;
 			}
 		}
@@ -537,7 +537,7 @@ public class ActionListener extends HttpServlet{
 					}
 				}
 			}catch(Exception e){
-				logger.error(Constant.Base.EXCEPTION, e);
+				logger.error(Constants.Base.EXCEPTION, e);
 				actionInterceptorBeanSign=false;
 			}
 		}

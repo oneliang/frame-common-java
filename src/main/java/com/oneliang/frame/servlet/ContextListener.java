@@ -7,7 +7,7 @@ import java.util.TimeZone;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.frame.ConfigurationFactory;
 import com.oneliang.frame.configuration.ConfigurationContext;
 import com.oneliang.util.common.StringUtil;
@@ -36,7 +36,7 @@ public class ContextListener implements ServletContextListener {
 	 * when the server is starting initial all thing
 	 */
 	public void contextInitialized(ServletContextEvent servletContextEvent) {
-		TimeZone.setDefault(TimeZone.getTimeZone(Constant.Timezone.ASIA_SHANGHAI));
+		TimeZone.setDefault(TimeZone.getTimeZone(Constants.Timezone.ASIA_SHANGHAI));
 		//System.setProperty(StaticVar.USER_TIMEZONE, StaticVar.TIMEZONE_ASIA_SHANGHAI);
 		Locale.setDefault(Locale.CHINA);
 //		String dbConfig=servletContextEvent.getServletContext().getInitParameter(CONTEXT_PARAMETER_DBCONFIG);
@@ -57,7 +57,7 @@ public class ContextListener implements ServletContextListener {
 				ConfigurationFactory.afterInject();
 			} catch (Exception e) {
 				e.printStackTrace();
-				logger.error(Constant.Base.EXCEPTION, e);
+				logger.error(Constants.Base.EXCEPTION, e);
 			}
 		}else{
 //			log.log("config file is not found,please initial the config file");

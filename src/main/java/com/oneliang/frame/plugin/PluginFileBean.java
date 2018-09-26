@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.frame.broadcast.BroadcastManager;
 import com.oneliang.frame.broadcast.Message;
 import com.oneliang.util.common.ObjectUtil;
@@ -114,7 +114,7 @@ public class PluginFileBean {
 						}
 					}
 				} catch (Exception e) {
-					logger.error(Constant.Base.EXCEPTION, e);
+					logger.error(Constants.Base.EXCEPTION, e);
 				}
 				if(this.onLoadedListener!=null){
 					this.setFinished(true);

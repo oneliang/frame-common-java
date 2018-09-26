@@ -9,7 +9,7 @@ import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.frame.log.LoggerContext;
 import com.oneliang.util.concurrent.ThreadPool;
 import com.oneliang.util.concurrent.ThreadTask;
@@ -99,7 +99,7 @@ class HttpProcessor implements ThreadTask{
 		if (new File(filePath).exists()) {
 			// 从服务器根目录下找到用户请求的文件并发送回浏览器
 			InputStream inputStream = new FileInputStream(filePath);
-			byte[] buffer=new byte[Constant.Capacity.BYTES_PER_KB];
+			byte[] buffer=new byte[Constants.Capacity.BYTES_PER_KB];
 			int length=-1;
 			while((length=inputStream.read(buffer,0,buffer.length))!=-1){
 				outputStream.write(buffer,0,length);

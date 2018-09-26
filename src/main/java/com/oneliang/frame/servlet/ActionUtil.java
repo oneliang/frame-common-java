@@ -18,7 +18,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.util.common.StringUtil;
 import com.oneliang.util.file.FileUtil;
 import com.oneliang.util.logging.Logger;
@@ -166,13 +166,13 @@ public final class ActionUtil{
 			ByteArrayOutputStream byteArrayOutputStream=includeJsp(jspUriPath,servletRequest,servletResponse);
 			FileUtil.createFile(saveFullFilename);
 			FileOutputStream fileOutputStream=new FileOutputStream(saveFullFilename);
-			BufferedWriter bufferedWriter=new BufferedWriter(new OutputStreamWriter(fileOutputStream,Constant.Encoding.UTF8));
+			BufferedWriter bufferedWriter=new BufferedWriter(new OutputStreamWriter(fileOutputStream,Constants.Encoding.UTF8));
 			bufferedWriter.write(new String(byteArrayOutputStream.toByteArray()));
 			bufferedWriter.flush();
 			bufferedWriter.close();
 			result=true;
 		}catch (Exception e) {
-			logger.error(Constant.Base.EXCEPTION, e);
+			logger.error(Constants.Base.EXCEPTION, e);
 		}
 		return result;
 	}

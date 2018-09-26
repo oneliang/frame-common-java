@@ -4,7 +4,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 
 public class UdpTest {
 
@@ -12,7 +12,7 @@ public class UdpTest {
 		try {
             DatagramSocket datagramSocket=new DatagramSocket();
             String data="aaabbbccc您好吗？哈哈？。。基，我很好啊";
-            byte[] dataByteArray=data.getBytes(Constant.Encoding.UTF8);
+            byte[] dataByteArray=data.getBytes(Constants.Encoding.UTF8);
             DatagramPacket datagramPacket=new DatagramPacket(dataByteArray,dataByteArray.length);
             InetAddress inetAddress=InetAddress.getByName("192.168.0.102");
             datagramPacket.setAddress(inetAddress);
@@ -27,7 +27,7 @@ public class UdpTest {
 		DatagramSocket datagramSocket=new DatagramSocket(50000);
 		while(true){
 			try{
-				byte[] buffer=new byte[Constant.Capacity.BYTES_PER_KB];
+				byte[] buffer=new byte[Constants.Capacity.BYTES_PER_KB];
 				DatagramPacket datagramPacket=new DatagramPacket(buffer,buffer.length);  
 				datagramSocket.receive(datagramPacket);
 				int totalLength=datagramPacket.getLength();
@@ -42,7 +42,7 @@ public class UdpTest {
 				}else{
 					
 				}
-				System.out.println(datagramPacket.getAddress()+","+new String(data,Constant.Encoding.UTF8));
+				System.out.println(datagramPacket.getAddress()+","+new String(data,Constants.Encoding.UTF8));
 			}catch (Exception e) {
 				e.printStackTrace();
 			}

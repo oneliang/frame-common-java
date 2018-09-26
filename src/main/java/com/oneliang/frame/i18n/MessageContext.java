@@ -8,7 +8,7 @@ import java.util.Queue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.exception.InitializeException;
 import com.oneliang.frame.AbstractContext;
 import com.oneliang.util.common.StringUtil;
@@ -26,7 +26,7 @@ public class MessageContext extends AbstractContext {
 
 	public void initialize(final String parameters) {
 		try{
-			String[] parameterArray=parameters.split(Constant.Symbol.COMMA);
+			String[] parameterArray=parameters.split(Constants.Symbol.COMMA);
 			if(parameterArray!=null){
 				boolean isRecursion=false;
 				String directoryPath=null;
@@ -85,7 +85,7 @@ public class MessageContext extends AbstractContext {
 				if(StringUtil.isMatchPattern(filename,matchPatternName)){
 					Properties properties=FileUtil.getProperties(file);
 					if(properties!=null){
-						String key=filename.substring(filename.indexOf(UNDERLINE)+1, filename.lastIndexOf(Constant.Symbol.DOT));
+						String key=filename.substring(filename.indexOf(UNDERLINE)+1, filename.lastIndexOf(Constants.Symbol.DOT));
 						if(messagePropertiesMap.containsKey(key)){
 							Properties messageProperties=messagePropertiesMap.get(key);
 							messageProperties.putAll(properties);
@@ -116,7 +116,7 @@ public class MessageContext extends AbstractContext {
 						if(StringUtil.isMatchPattern(filename,matchPatternName)){
 							Properties properties=FileUtil.getProperties(directoryPath+filename);
 							if(properties!=null){
-								String key=filename.substring(filename.indexOf(UNDERLINE)+1, filename.lastIndexOf(Constant.Symbol.DOT));
+								String key=filename.substring(filename.indexOf(UNDERLINE)+1, filename.lastIndexOf(Constants.Symbol.DOT));
 								if(messagePropertiesMap.containsKey(key)){
 									Properties messageProperties=messagePropertiesMap.get(key);
 									messageProperties.putAll(properties);

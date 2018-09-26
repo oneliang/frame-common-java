@@ -4,7 +4,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.exception.MappingNotFoundException;
 import com.oneliang.util.common.ObjectUtil;
 import com.oneliang.util.common.StringUtil;
@@ -43,9 +43,9 @@ public final class SqlInjectUtil{
 						if(fieldName!=null){
 							String columnName=mappingBean.getColumn(fieldName);
 							if (columnName!=null) {
-								columnNameStringBuilder.append(columnName+Constant.Symbol.COMMA);
+								columnNameStringBuilder.append(columnName+Constants.Symbol.COMMA);
 								Object value = method.invoke(object,new Object[]{});
-								values.append(Constant.Symbol.QUESTION_MARK+Constant.Symbol.COMMA);
+								values.append(Constants.Symbol.QUESTION_MARK+Constants.Symbol.COMMA);
 								if(parameterList!=null){
 									parameterList.add(value);
 								}
@@ -95,8 +95,8 @@ public final class SqlInjectUtil{
 					if(fieldName!=null){
 						String columnName=mappingBean.getColumn(fieldName);
 						if (columnName!=null) {
-							columnNameStringBuilder.append(columnName+Constant.Symbol.COMMA);
-							valueStringBuilder.append(Constant.Symbol.QUESTION_MARK+Constant.Symbol.COMMA);
+							columnNameStringBuilder.append(columnName+Constants.Symbol.COMMA);
+							valueStringBuilder.append(Constants.Symbol.QUESTION_MARK+Constants.Symbol.COMMA);
 							if(fieldNameList!=null){
 								fieldNameList.add(fieldName);
 							}

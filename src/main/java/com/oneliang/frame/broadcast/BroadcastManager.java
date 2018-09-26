@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.util.logging.Logger;
 import com.oneliang.util.logging.LoggerManager;
 
@@ -115,7 +115,7 @@ public class BroadcastManager implements BroadcastSender, Runnable {
                 }
             }
         } catch (Exception e) {
-            logger.error(Constant.Base.EXCEPTION, e);
+            logger.error(Constants.Base.EXCEPTION, e);
             Thread.currentThread().interrupt();
         }
     }

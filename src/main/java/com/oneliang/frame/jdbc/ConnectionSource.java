@@ -3,7 +3,7 @@ package com.oneliang.frame.jdbc;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.util.logging.Logger;
 import com.oneliang.util.logging.LoggerManager;
 import com.oneliang.util.resource.ResourceSource;
@@ -65,7 +65,7 @@ public class ConnectionSource extends ResourceSource<Connection>{
 			try {
 				Thread.currentThread().getContextClassLoader().loadClass(this.driver).newInstance();
 			} catch (Exception e) {
-				logger.error(Constant.Base.EXCEPTION, e);
+				logger.error(Constants.Base.EXCEPTION, e);
 			}
 		}
 	}
@@ -128,7 +128,7 @@ public class ConnectionSource extends ResourceSource<Connection>{
 		try {
 			connection = DriverManager.getConnection(this.url, this.user, this.password);
 		} catch (Exception e) {
-			logger.error(Constant.Base.EXCEPTION, e);
+			logger.error(Constants.Base.EXCEPTION, e);
 		}
 		return connection;
 	}

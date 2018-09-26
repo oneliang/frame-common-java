@@ -5,7 +5,7 @@ import java.util.List;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.util.common.StringUtil;
 
 public class IfEmptyTag extends BodyTagSupport {
@@ -25,7 +25,7 @@ public class IfEmptyTag extends BodyTagSupport {
 		this.value=StringUtil.nullToBlank(this.value);
 		this.scope=StringUtil.nullToBlank(this.scope);
 		Object o=null;
-		if (this.scope.equals(Constant.RequestScope.SESSION)) {
+		if (this.scope.equals(Constants.RequestScope.SESSION)) {
 			o=this.pageContext.getSession().getAttribute(this.value);
 		} else {
 			o=this.pageContext.getRequest().getAttribute(this.value);

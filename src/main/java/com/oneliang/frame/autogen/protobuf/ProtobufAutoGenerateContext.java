@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.exception.InitializeException;
 import com.oneliang.frame.autogen.AutoGenerateContext;
 import com.oneliang.frame.autogen.protobuf.ProtobufTemplateBean.Field;
@@ -29,7 +29,7 @@ public class ProtobufAutoGenerateContext extends AutoGenerateContext {
 
     public void initialize(String parameters) {
         try {
-            String[] parameterArray = parameters.split(Constant.Symbol.COMMA);
+            String[] parameterArray = parameters.split(Constants.Symbol.COMMA);
             String toFolder = null;
             String templateFile = null;
             String protoFile = null;
@@ -59,7 +59,7 @@ public class ProtobufAutoGenerateContext extends AutoGenerateContext {
             while ((line = bufferedReader.readLine()) != null) {
                 if (StringUtil.isNotBlank(line)) {
                     if (line.startsWith(PACKAGE)) {
-                        packageName = line.replace(PACKAGE, StringUtil.BLANK).replace(Constant.Symbol.SEMICOLON, StringUtil.BLANK).trim();
+                        packageName = line.replace(PACKAGE, StringUtil.BLANK).replace(Constants.Symbol.SEMICOLON, StringUtil.BLANK).trim();
                     } else if (StringUtil.isMatchRegex(line, MESSAGE_REGEX)) {
                         List<String> groupList = StringUtil.parseRegexGroup(line.trim(), MESSAGE_REGEX);
                         if (groupList != null && groupList.size() == 1) {
@@ -108,7 +108,7 @@ public class ProtobufAutoGenerateContext extends AutoGenerateContext {
                 Parameter parameter = new Parameter();
                 parameter.setTemplateFile(projectRealPath + protobufTemplateBean.getTemplateFile());
                 parameter.setObject(protobufTemplateBean);
-                parameter.setToFile(projectRealPath + protobufTemplateBean.getToFolder() + Constant.Symbol.SLASH_LEFT + protobufTemplateBean.getPackageName().replace(Constant.Symbol.DOT, Constant.Symbol.SLASH_LEFT) + Constant.Symbol.SLASH_LEFT + protobufTemplateBean.getClassName() + Constant.Symbol.DOT + Constant.File.JAVA);
+                parameter.setToFile(projectRealPath + protobufTemplateBean.getToFolder() + Constants.Symbol.SLASH_LEFT + protobufTemplateBean.getPackageName().replace(Constants.Symbol.DOT, Constants.Symbol.SLASH_LEFT) + Constants.Symbol.SLASH_LEFT + protobufTemplateBean.getClassName() + Constants.Symbol.DOT + Constants.File.JAVA);
                 template.generate(parameter);
             }
         } catch (Exception e) {

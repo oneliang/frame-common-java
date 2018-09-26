@@ -1,14 +1,14 @@
 package com.oneliang.test.orm;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.test.orm.Entity.Column;
 
 @Entity(table = "t_user")
 public class User {
 
-    @Column(isId = true, condition = { @Column.Condition(key = Constant.Database.MYSQL, value = "varchar(40) NOT NULL DEFAULT ''") })
+    @Column(isId = true, condition = { @Column.Condition(key = Constants.Database.MYSQL, value = "varchar(40) NOT NULL DEFAULT ''") })
     private String id = null;
-    @Column(condition = { @Column.Condition(key = Constant.Database.MYSQL, value = "varchar(40) DEFAULT NULL") })
+    @Column(condition = { @Column.Condition(key = Constants.Database.MYSQL, value = "varchar(40) DEFAULT NULL") })
     private String name = null;
 
     /**

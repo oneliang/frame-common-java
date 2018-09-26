@@ -6,7 +6,7 @@ import java.util.Properties;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.frame.i18n.MessageContext;
 import com.oneliang.util.common.StringUtil;
 import com.oneliang.util.logging.Logger;
@@ -51,7 +51,7 @@ public class MessageTag extends BodyTagSupport {
 			}
 			this.pageContext.getOut().print(value);
 		} catch (Exception e) {
-			logger.error(Constant.Base.EXCEPTION, e);
+			logger.error(Constants.Base.EXCEPTION, e);
 		}
 		return EVAL_PAGE;
 	}

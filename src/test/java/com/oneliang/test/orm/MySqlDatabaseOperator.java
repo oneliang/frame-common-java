@@ -3,7 +3,7 @@ package com.oneliang.test.orm;
 import java.sql.Connection;
 import java.util.List;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.frame.jdbc.BaseQuery;
 import com.oneliang.frame.jdbc.BaseQueryImpl;
 import com.oneliang.frame.jdbc.ConnectionSource;
@@ -47,7 +47,7 @@ public class MySqlDatabaseOperator extends DatabaseOperator {
                 for (Entity.Column.Condition conditionAnnotation : conditionAnnotationArray) {
                     String key = conditionAnnotation.key();
                     String value = conditionAnnotation.value();
-                    if (key != null && key.equals(Constant.Database.MYSQL)) {
+                    if (key != null && key.equals(Constants.Database.MYSQL)) {
                         condition = value;
                     }
                 }
@@ -59,11 +59,11 @@ public class MySqlDatabaseOperator extends DatabaseOperator {
             columnStringBuilder.append("");
             if (isId) {
                 if (primaryKeyStringBuilder.length() > 0) {
-                    primaryKeyStringBuilder.append(Constant.Symbol.COMMA);
+                    primaryKeyStringBuilder.append(Constants.Symbol.COMMA);
                 }
                 primaryKeyStringBuilder.append(columnName);
             }
-            columnStringBuilder.append(columnName + " " + condition + Constant.Symbol.COMMA);
+            columnStringBuilder.append(columnName + " " + condition + Constants.Symbol.COMMA);
             logger.info(String.format("Reading entity column,field name:%s,column name:%s", fieldName, columnName));
         }
 

@@ -6,11 +6,11 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 
 public final class StaticFilePathUtil{
 
-	private static final String RESPONSE_STATIC_CONTENTTYPE="text/html;charset="+Constant.Encoding.UTF8;
+	private static final String RESPONSE_STATIC_CONTENTTYPE="text/html;charset="+Constants.Encoding.UTF8;
 
 	/**
 	 * key:uri,value:

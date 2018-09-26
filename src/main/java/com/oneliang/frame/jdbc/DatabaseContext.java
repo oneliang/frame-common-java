@@ -7,7 +7,7 @@ import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.exception.InitializeException;
 import com.oneliang.frame.AbstractContext;
 import com.oneliang.util.common.StringUtil;
@@ -41,7 +41,7 @@ public class DatabaseContext extends AbstractContext {
 				while(iterator.hasNext()){
 				    Entry<Object,Object> entry=iterator.next();
 					String key=entry.getKey().toString();
-					int index=key.indexOf(Constant.Symbol.DOT);
+					int index=key.indexOf(Constants.Symbol.DOT);
 					if(index>0){
 						String poolName=key.substring(0, index);
 						String propertyName=key.substring(index+1, key.length());
@@ -102,7 +102,7 @@ public class DatabaseContext extends AbstractContext {
 			try{
 				pool.initialize();
 			}catch (Exception e) {
-				logger.error(Constant.Base.EXCEPTION, e);
+				logger.error(Constants.Base.EXCEPTION, e);
 			}
 		}
 	}

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.util.common.ObjectUtil;
 import com.oneliang.util.json.JsonUtil;
 import com.oneliang.util.json.JsonUtil.JsonProcessor;
@@ -52,7 +52,7 @@ public class JsonTree<T extends Object> extends Tree<T> {
 		StringBuilder stringBuilder=new StringBuilder();
 		T object = root.getObject();
 		Iterator<Entry<String,String>> iterator=keyValueMap.entrySet().iterator();
-		stringBuilder.append(Constant.Symbol.BIG_BRACKET_LEFT);
+		stringBuilder.append(Constants.Symbol.BIG_BRACKET_LEFT);
 		while(iterator.hasNext()){
 			Entry<String,String> entry=iterator.next();
 		    String key=entry.getKey();
@@ -61,29 +61,29 @@ public class JsonTree<T extends Object> extends Tree<T> {
 			if(jsonProcessor!=null){
 				methodReturnValue=jsonProcessor.process(null, fieldName,methodReturnValue,false);
 			}
-			stringBuilder.append(Constant.Symbol.DOUBLE_QUOTES+key+Constant.Symbol.DOUBLE_QUOTES+Constant.Symbol.COLON+methodReturnValue.toString());
+			stringBuilder.append(Constants.Symbol.DOUBLE_QUOTES+key+Constants.Symbol.DOUBLE_QUOTES+Constants.Symbol.COLON+methodReturnValue.toString());
             if(iterator.hasNext()){
-            	stringBuilder.append(Constant.Symbol.COMMA);
+            	stringBuilder.append(Constants.Symbol.COMMA);
             }
 		}
 		if(!root.isLeaf()){
 			List<TreeNode<T>> childList = root.getChildNodeList();
-			stringBuilder.append(Constant.Symbol.COMMA+Constant.Symbol.DOUBLE_QUOTES+hasChildren+Constant.Symbol.DOUBLE_QUOTES+Constant.Symbol.COLON+true);
-			stringBuilder.append(Constant.Symbol.COMMA+Constant.Symbol.DOUBLE_QUOTES+children+Constant.Symbol.DOUBLE_QUOTES+Constant.Symbol.COLON+Constant.Symbol.MIDDLE_BRACKET_LEFT);
+			stringBuilder.append(Constants.Symbol.COMMA+Constants.Symbol.DOUBLE_QUOTES+hasChildren+Constants.Symbol.DOUBLE_QUOTES+Constants.Symbol.COLON+true);
+			stringBuilder.append(Constants.Symbol.COMMA+Constants.Symbol.DOUBLE_QUOTES+children+Constants.Symbol.DOUBLE_QUOTES+Constants.Symbol.COLON+Constants.Symbol.MIDDLE_BRACKET_LEFT);
 			int index=0;
 			int lastIndex=childList.size()-1;
 			for (TreeNode<T> node : childList) {
 				stringBuilder.append(generateJsonTree(node,keyValueMap,jsonProcessor));
 				if(index<lastIndex){
-					stringBuilder.append(Constant.Symbol.COMMA);
+					stringBuilder.append(Constants.Symbol.COMMA);
 				}
 				index++;
 			}
-			stringBuilder.append(Constant.Symbol.MIDDLE_BRACKET_RIGHT);
+			stringBuilder.append(Constants.Symbol.MIDDLE_BRACKET_RIGHT);
 		}else{
-			stringBuilder.append(Constant.Symbol.COMMA+Constant.Symbol.DOUBLE_QUOTES+hasChildren+Constant.Symbol.DOUBLE_QUOTES+Constant.Symbol.COLON+false);
+			stringBuilder.append(Constants.Symbol.COMMA+Constants.Symbol.DOUBLE_QUOTES+hasChildren+Constants.Symbol.DOUBLE_QUOTES+Constants.Symbol.COLON+false);
 		}
-		stringBuilder.append(Constant.Symbol.BIG_BRACKET_RIGHT);
+		stringBuilder.append(Constants.Symbol.BIG_BRACKET_RIGHT);
 		string=stringBuilder.toString();
 		return string;
 	}

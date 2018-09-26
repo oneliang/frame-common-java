@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.frame.servlet.action.ActionInterface.HttpRequestMethod;
 import com.oneliang.util.common.StringUtil;
 
@@ -205,21 +205,21 @@ public class ActionBean{
 		this.httpRequestMethods = httpRequestMethods;
 		if(StringUtil.isNotBlank(this.httpRequestMethods)){
 			this.httpRequestMethodsCode=0;
-			String[] httpRequestMethodArray=this.httpRequestMethods.split(Constant.Symbol.COMMA);
+			String[] httpRequestMethodArray=this.httpRequestMethods.split(Constants.Symbol.COMMA);
 			for(String httpRequestMethod:httpRequestMethodArray){
-				if(httpRequestMethod.equalsIgnoreCase(Constant.Http.RequestMethod.PUT)){
+				if(httpRequestMethod.equalsIgnoreCase(Constants.Http.RequestMethod.PUT)){
 					this.httpRequestMethodsCode|=HttpRequestMethod.PUT.getCode();
-				}else if(httpRequestMethod.equalsIgnoreCase(Constant.Http.RequestMethod.DELETE)){
+				}else if(httpRequestMethod.equalsIgnoreCase(Constants.Http.RequestMethod.DELETE)){
 					this.httpRequestMethodsCode|=HttpRequestMethod.DELETE.getCode();
-				}else if(httpRequestMethod.equalsIgnoreCase(Constant.Http.RequestMethod.GET)){
+				}else if(httpRequestMethod.equalsIgnoreCase(Constants.Http.RequestMethod.GET)){
 					this.httpRequestMethodsCode|=HttpRequestMethod.GET.getCode();
-				}else if(httpRequestMethod.equalsIgnoreCase(Constant.Http.RequestMethod.POST)){
+				}else if(httpRequestMethod.equalsIgnoreCase(Constants.Http.RequestMethod.POST)){
 					this.httpRequestMethodsCode|=HttpRequestMethod.POST.getCode();
-				}else if(httpRequestMethod.equalsIgnoreCase(Constant.Http.RequestMethod.HEAD)){
+				}else if(httpRequestMethod.equalsIgnoreCase(Constants.Http.RequestMethod.HEAD)){
 					this.httpRequestMethodsCode|=HttpRequestMethod.HEAD.getCode();
-				}else if(httpRequestMethod.equalsIgnoreCase(Constant.Http.RequestMethod.OPTIONS)){
+				}else if(httpRequestMethod.equalsIgnoreCase(Constants.Http.RequestMethod.OPTIONS)){
 					this.httpRequestMethodsCode|=HttpRequestMethod.OPTIONS.getCode();
-				}else if(httpRequestMethod.equalsIgnoreCase(Constant.Http.RequestMethod.TRACE)){
+				}else if(httpRequestMethod.equalsIgnoreCase(Constants.Http.RequestMethod.TRACE)){
 					this.httpRequestMethodsCode|=HttpRequestMethod.TRACE.getCode();
 				}
 			}

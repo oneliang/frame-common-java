@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.util.logging.Logger;
 import com.oneliang.util.logging.LoggerManager;
 
@@ -26,7 +26,7 @@ public class ProjectPathTag extends BodyTagSupport {
 		try {
 			pageContext.getOut().print(path);
 		} catch (Exception e) {
-			logger.error(Constant.Base.EXCEPTION, e);
+			logger.error(Constants.Base.EXCEPTION, e);
 		}
 		return EVAL_PAGE;
 	}

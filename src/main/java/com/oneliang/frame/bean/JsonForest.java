@@ -3,7 +3,7 @@ package com.oneliang.frame.bean;
 import java.util.List;
 import java.util.Map;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.util.json.JsonUtil;
 import com.oneliang.util.json.JsonUtil.JsonProcessor;
 
@@ -60,10 +60,10 @@ public class JsonForest<T extends Object> extends Forest<T> {
 		for(Tree<T> tree:this.treeList){
 			string.append(((JsonTree<T>)tree).generateJsonTree(keyValueMap,jsonProcessor));
 			if(index<lastIndex){
-				string.append(Constant.Symbol.COMMA);
+				string.append(Constants.Symbol.COMMA);
 			}
 			index++;
 		}
-		return Constant.Symbol.MIDDLE_BRACKET_LEFT+string.toString()+Constant.Symbol.MIDDLE_BRACKET_RIGHT;
+		return Constants.Symbol.MIDDLE_BRACKET_LEFT+string.toString()+Constants.Symbol.MIDDLE_BRACKET_RIGHT;
 	}
 }

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.exception.FileLoadException;
 import com.oneliang.util.common.StringUtil;
 import com.oneliang.util.jar.JarClassLoader;
@@ -41,7 +41,7 @@ public final class AnnotationContextUtil{
 	 */
 	public static List<Class<?>> parseAnnotationContextParameter(final String parameters, final ClassLoader classLoader, String classesRealPath, final JarClassLoader jarClassLoader, final String projectRealPath, final Class<? extends Annotation> annotationClass) throws ClassNotFoundException,FileLoadException{
 		List<Class<?>> classList=null;
-		String[] parameterArray=parameters.split(Constant.Symbol.COMMA);
+		String[] parameterArray=parameters.split(Constants.Symbol.COMMA);
 		if(parameterArray!=null){
 			if(parameterArray.length==1){
 				String path=parameters;
@@ -64,7 +64,7 @@ public final class AnnotationContextUtil{
 						file=parameter.replaceFirst(PARAMETER_FILE, StringUtil.BLANK);
 					}
 				}
-				if(type!=null&&type.equalsIgnoreCase(Constant.File.JAR)){
+				if(type!=null&&type.equalsIgnoreCase(Constants.File.JAR)){
 					if(file.startsWith(SIGN_ROOT)){
 						file=file.replace(SIGN_ROOT, projectRealPath);
 					}
@@ -100,9 +100,9 @@ public final class AnnotationContextUtil{
 					}
 				}
 			}else if(file.isFile()){
-				if(filename.endsWith(Constant.Symbol.DOT+Constant.File.CLASS)){
+				if(filename.endsWith(Constants.Symbol.DOT+Constants.File.CLASS)){
 					String filePath=file.getAbsolutePath();
-					String className=filePath.substring(classesRealPathFile.getAbsolutePath().length()+1,filePath.length()-(Constant.Symbol.DOT+Constant.File.CLASS).length()).replace(File.separator, Constant.Symbol.DOT);
+					String className=filePath.substring(classesRealPathFile.getAbsolutePath().length()+1,filePath.length()-(Constants.Symbol.DOT+Constants.File.CLASS).length()).replace(File.separator, Constants.Symbol.DOT);
 					Class<?> clazz=Thread.currentThread().getContextClassLoader().loadClass(className);
 					if(clazz.isAnnotationPresent(annotationClass)){
 						logger.info(clazz);

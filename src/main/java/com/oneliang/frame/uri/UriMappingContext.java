@@ -12,7 +12,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.exception.InitializeException;
 import com.oneliang.frame.AbstractContext;
 import com.oneliang.util.common.JavaXmlUtil;
@@ -64,7 +64,7 @@ public class UriMappingContext extends AbstractContext {
 		while(iterator.hasNext()){
 			Entry<String,UriMappingBean> entry=iterator.next();
 			String from=entry.getKey();
-			String fromRegex=Constant.Symbol.XOR+from+Constant.Symbol.DOLLAR;
+			String fromRegex=Constants.Symbol.XOR+from+Constants.Symbol.DOLLAR;
 			if(StringUtil.isMatchRegex(uriFrom, fromRegex)){
 				uriTo=entry.getValue().getTo();
 				List<String> groupList=StringUtil.parseRegexGroup(uriFrom, fromRegex);

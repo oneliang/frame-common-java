@@ -9,7 +9,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.StaticVar;
 import com.oneliang.frame.servlet.ActionUtil;
 import com.oneliang.util.common.StringUtil;
@@ -76,7 +76,7 @@ public abstract class AbstractFileUploadAction extends CommonAction{
 	 * @throws ActionExecuteException
 	 */
 	protected List<FileUploadResult> upload(ServletRequest request, ServletResponse response, String fileFullName, String[] saveFilenames) throws ActionExecuteException {
-		response.setContentType(Constant.Http.ContentType.TEXT_PLAIN);
+		response.setContentType(Constants.Http.ContentType.TEXT_PLAIN);
 		// get content type of client request
 		String contentType = request.getContentType();
 		List<FileUploadResult> fileUploadResultList=null;
@@ -88,11 +88,11 @@ public abstract class AbstractFileUploadAction extends CommonAction{
 				fileUpload.setSaveFilePath(filePath);
 				// make sure content type is multipart/form-data,form file use
 				
-				if(contentType.indexOf(Constant.Http.ContentType.MULTIPART_FORM_DATA)>=0){
+				if(contentType.indexOf(Constants.Http.ContentType.MULTIPART_FORM_DATA)>=0){
 					fileUploadResultList=fileUpload.upload(inputStream,request.getContentLength(),saveFilenames);
 				}
 				// make sure content type is application/octet-stream or binary/octet-stream,flash jpeg picture use or file upload use
-				else if(contentType.indexOf(Constant.Http.ContentType.APPLICATION_OCTET_STREAM)>=0||contentType.indexOf(Constant.Http.ContentType.BINARY_OCTET_STREAM)>=0){
+				else if(contentType.indexOf(Constants.Http.ContentType.APPLICATION_OCTET_STREAM)>=0||contentType.indexOf(Constants.Http.ContentType.BINARY_OCTET_STREAM)>=0){
 					if(StringUtil.isNotBlank(fileFullName)){
 						fileUploadResultList=new ArrayList<FileUploadResult>();
 						FileUploadResult fileUploadResult=fileUpload.upload(inputStream, fileFullName);

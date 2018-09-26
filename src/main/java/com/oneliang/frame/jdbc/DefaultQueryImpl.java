@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.util.Collection;
 import java.util.List;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.frame.ConfigurationFactory;
 import com.oneliang.frame.bean.Page;
 import com.oneliang.util.common.StringUtil;
@@ -649,8 +649,8 @@ public class DefaultQueryImpl extends BaseQueryImpl implements Query{
 		if(condition!=null){
 			sqlConditions.append(condition);
 		}
-		sqlConditions.append(" "+Constant.Database.MySql.PAGINATION+" ");
-		sqlConditions.append(startRow+Constant.Symbol.COMMA+rowsPerPage);
+		sqlConditions.append(" "+Constants.Database.MySql.PAGINATION+" ");
+		sqlConditions.append(startRow+Constants.Symbol.COMMA+rowsPerPage);
 		return this.selectObjectList(clazz,selectColumns,table, sqlConditions.toString(), parameters);
 	}
 
@@ -977,13 +977,13 @@ public class DefaultQueryImpl extends BaseQueryImpl implements Query{
 			String sql=null;
 			if(clazz!=null){
 				MappingBean mappingBean=ConfigurationFactory.findMappingBean(clazz);
-				sql=SqlUtil.selectSql(new String[]{"COUNT(0) AS "+Constant.Database.COLUMN_NAME_TOTAL},table,condition,mappingBean);
+				sql=SqlUtil.selectSql(new String[]{"COUNT(0) AS "+Constants.Database.COLUMN_NAME_TOTAL},table,condition,mappingBean);
 			}else{
-				sql=SqlUtil.selectSql(new String[]{"COUNT(0) AS "+Constant.Database.COLUMN_NAME_TOTAL},table,condition,null);
+				sql=SqlUtil.selectSql(new String[]{"COUNT(0) AS "+Constants.Database.COLUMN_NAME_TOTAL},table,condition,null);
 			}
 			resultSet=super.executeQueryBySql(connection, sql, parameters);
 			if(resultSet!=null&&resultSet.next()){
-				totalRows=resultSet.getInt(Constant.Database.COLUMN_NAME_TOTAL);
+				totalRows=resultSet.getInt(Constants.Database.COLUMN_NAME_TOTAL);
 			}
 		}catch(Exception e){
 			throw new QueryException(e);

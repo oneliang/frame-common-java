@@ -3,7 +3,7 @@ package com.oneliang.frame.servlet.taglib;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.util.common.StringUtil;
 import com.oneliang.util.common.TimeUtil;
 import com.oneliang.util.logging.Logger;
@@ -27,7 +27,7 @@ public class TimeMillisToDateTag extends BodyTagSupport {
 				String dateString=TimeUtil.dateToString(TimeUtil.timeMillisToDate(Long.parseLong(value)),this.format);
 				this.pageContext.getOut().print(dateString);
 			} catch (Exception e) {
-				logger.error(Constant.Base.EXCEPTION, e);
+				logger.error(Constants.Base.EXCEPTION, e);
 			}
 		}
 		return EVAL_PAGE;

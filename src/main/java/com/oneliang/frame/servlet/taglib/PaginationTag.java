@@ -3,7 +3,7 @@ package com.oneliang.frame.servlet.taglib;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.frame.bean.Page;
 import com.oneliang.util.common.StringUtil;
 import com.oneliang.util.logging.Logger;
@@ -47,7 +47,7 @@ public class PaginationTag extends BodyTagSupport {
 	
 	public int doEndTag() throws JspException{
 		Object object=null;
-		if(this.scope.equals(Constant.RequestScope.SESSION)){
+		if(this.scope.equals(Constants.RequestScope.SESSION)){
 			object=this.pageContext.getSession().getAttribute(value);
 		}else{
 			object=this.pageContext.getRequest().getAttribute(value);
@@ -107,7 +107,7 @@ public class PaginationTag extends BodyTagSupport {
 			try {
 				this.pageContext.getOut().println(paginationHtml.toString());
 			} catch (Exception e) {
-				logger.error(Constant.Base.EXCEPTION, e);
+				logger.error(Constants.Base.EXCEPTION, e);
 			}
 		}
 		return EVAL_PAGE;

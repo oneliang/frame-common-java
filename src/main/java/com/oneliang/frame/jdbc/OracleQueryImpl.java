@@ -3,7 +3,7 @@ package com.oneliang.frame.jdbc;
 import java.sql.Connection;
 import java.util.List;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.frame.ConfigurationFactory;
 import com.oneliang.frame.bean.Page;
 import com.oneliang.util.common.StringUtil;
@@ -32,7 +32,7 @@ public class OracleQueryImpl extends DefaultQueryImpl {
 		final String rowNumAlias="rn";
 		final String tableAlias="t";
 		if (selectColumns==null||selectColumns.length==0) {
-			selectColumns=new String[]{tableAlias+Constant.Symbol.DOT+Constant.Symbol.WILDCARD};
+			selectColumns=new String[]{tableAlias+Constants.Symbol.DOT+Constants.Symbol.WILDCARD};
 		}
 		String[] newColumns=new String[selectColumns.length+1];
 		System.arraycopy(selectColumns, 0, newColumns, 0, selectColumns.length);
@@ -43,7 +43,7 @@ public class OracleQueryImpl extends DefaultQueryImpl {
 		}
 		table=table+" "+tableAlias;
 		table=SqlUtil.selectSql(newColumns, table, condition);
-		table=Constant.Symbol.BRACKET_LEFT+table+Constant.Symbol.BRACKET_RIGHT;
+		table=Constants.Symbol.BRACKET_LEFT+table+Constants.Symbol.BRACKET_RIGHT;
 		//generate outer conditions
 		StringBuilder sqlConditions=new StringBuilder();
 		sqlConditions.append("and "+rowNumAlias+">"+startRow+" and "+rowNumAlias+"<="+rowsPerPage*currentPage);

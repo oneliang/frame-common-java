@@ -14,7 +14,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.exception.InitializeException;
 import com.oneliang.frame.AbstractContext;
 import com.oneliang.frame.ioc.aop.AfterReturningProcessor;
@@ -148,8 +148,8 @@ public class IocContext extends AbstractContext{
 	    Class<?> beanClass=iocBean.getBeanClass();
         String constructorTypes=iocConstructorBean.getTypes();
         String constructorReferences=iocConstructorBean.getReferences();
-        String[] constructorTypeArray=constructorTypes.split(Constant.Symbol.COMMA);
-        String[] constructorReferenceArray=constructorReferences.split(Constant.Symbol.COMMA);
+        String[] constructorTypeArray=constructorTypes.split(Constants.Symbol.COMMA);
+        String[] constructorReferenceArray=constructorReferences.split(Constants.Symbol.COMMA);
         Class<?>[] constructorTypeClassArray=new Class<?>[constructorTypeArray.length];
         Object[] constructorReferenceObjectArray=new Object[constructorReferenceArray.length];
         int index=0;
@@ -309,7 +309,7 @@ public class IocContext extends AbstractContext{
 			Method[] objectMethods=object.getClass().getMethods();
 			for(Method method:objectMethods){
 				String methodName=method.getName();
-				if(methodName.startsWith(Constant.Method.PREFIX_SET)){
+				if(methodName.startsWith(Constants.Method.PREFIX_SET)){
 					Class<?>[] types=method.getParameterTypes();
 					if(types!=null&&types.length==1){
 						Class<?> parameterClass=types[0];
@@ -352,10 +352,10 @@ public class IocContext extends AbstractContext{
 			Method[] objectMethods=object.getClass().getMethods();
 			for(Method method:objectMethods){
 				String methodName=method.getName();
-				if(methodName.startsWith(Constant.Method.PREFIX_SET)){
+				if(methodName.startsWith(Constants.Method.PREFIX_SET)){
 					Class<?>[] types=method.getParameterTypes();
 					if(types!=null&&types.length==1){
-						String fieldName=ObjectUtil.methodNameToFieldName(Constant.Method.PREFIX_SET, methodName);
+						String fieldName=ObjectUtil.methodNameToFieldName(Constants.Method.PREFIX_SET, methodName);
 						IocBean iocBean=iocBeanMap.get(fieldName);
 						if(iocBean!=null){
 							Object proxyInstance=iocBean.getProxyInstance();
@@ -384,8 +384,8 @@ public class IocContext extends AbstractContext{
 					Method[] objectMethods=beanInstance.getClass().getMethods();
 					for(Method method:objectMethods){
 						String methodName=method.getName();
-						if(methodName.startsWith(Constant.Method.PREFIX_SET)){
-							String fieldName=ObjectUtil.methodNameToFieldName(Constant.Method.PREFIX_SET, methodName);
+						if(methodName.startsWith(Constants.Method.PREFIX_SET)){
+							String fieldName=ObjectUtil.methodNameToFieldName(Constants.Method.PREFIX_SET, methodName);
 							if(propertyName.equals(fieldName)){
 								Class<?>[] types=method.getParameterTypes();
 								if(types!=null&&types.length==1){

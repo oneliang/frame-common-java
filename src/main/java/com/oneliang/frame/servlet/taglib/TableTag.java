@@ -3,7 +3,7 @@ package com.oneliang.frame.servlet.taglib;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.util.common.StringUtil;
 import com.oneliang.util.logging.Logger;
 import com.oneliang.util.logging.LoggerManager;
@@ -34,7 +34,7 @@ public class TableTag extends BodyTagSupport {
 		try {
 			this.pageContext.getOut().print(startTable);
 		} catch (Exception e) {
-			logger.error(Constant.Base.EXCEPTION, e);
+			logger.error(Constants.Base.EXCEPTION, e);
 		}
 		return EVAL_BODY_INCLUDE;
 	}
@@ -49,7 +49,7 @@ public class TableTag extends BodyTagSupport {
 		try {
 			this.pageContext.getOut().print(endTable);
 		} catch (Exception e) {
-			logger.error(Constant.Base.EXCEPTION, e);
+			logger.error(Constants.Base.EXCEPTION, e);
 		}
 		return EVAL_PAGE;
 	}

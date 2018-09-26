@@ -4,7 +4,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.exception.InitializeException;
 import com.oneliang.frame.AnnotationContextUtil;
 import com.oneliang.frame.servlet.action.Action.RequestMapping;
@@ -44,13 +44,13 @@ public class AnnotationActionContext extends ActionContext {
 									for(int i=0;i<httpRequestMethods.length;i++){
 										stringBuilder.append(httpRequestMethods[i]);
 										if(i<(httpRequestMethods.length-1)){
-											stringBuilder.append(Constant.Symbol.COMMA);
+											stringBuilder.append(Constants.Symbol.COMMA);
 										}
 									}
 									annotationActionBean.setHttpRequestMethods(stringBuilder.toString());
 								}
 								int httpRequestMethodsCode=annotationActionBean.getHttpRequestMethodsCode();
-								String id=classId+Constant.Symbol.DOT+method.getName()+Constant.Symbol.COMMA+httpRequestMethodsCode;
+								String id=classId+Constants.Symbol.DOT+method.getName()+Constants.Symbol.COMMA+httpRequestMethodsCode;
 								annotationActionBean.setId(id);
 								String requestPath=requestMappingAnnotation.value();
 								annotationActionBean.setPath(requestPath);

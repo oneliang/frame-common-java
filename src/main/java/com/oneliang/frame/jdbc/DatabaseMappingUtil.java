@@ -2,7 +2,7 @@ package com.oneliang.frame.jdbc;
 
 import java.util.List;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.exception.MappingNotFoundException;
 import com.oneliang.frame.ConfigurationFactory;
 import com.oneliang.util.common.StringUtil;
@@ -35,7 +35,7 @@ public final class DatabaseMappingUtil{
 		if(list!=null){
 			for (String string : list) {
 				int pos = 0;
-				if ((pos = string.lastIndexOf(Constant.Symbol.DOT)) > 0) {
+				if ((pos = string.lastIndexOf(Constants.Symbol.DOT)) > 0) {
 					String className = string.substring(0, pos);
 					String fieldName = string.substring(pos + 1, string.length());
 					MappingBean mappingBean=ConfigurationFactory.findMappingBean(className);
@@ -44,7 +44,7 @@ public final class DatabaseMappingUtil{
 						if(column!=null){
 							sql = sql.replaceFirst(REGEX, column);
 						} else {
-							throw new MappingNotFoundException("can not find the mapping field: "+className+Constant.Symbol.DOT+fieldName);
+							throw new MappingNotFoundException("can not find the mapping field: "+className+Constants.Symbol.DOT+fieldName);
 						}
 					}else{
 						throw new MappingNotFoundException("can not find the mapping bean: "+className);

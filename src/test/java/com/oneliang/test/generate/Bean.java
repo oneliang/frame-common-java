@@ -3,7 +3,7 @@ package com.oneliang.test.generate;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.util.generate.Template;
 import com.oneliang.util.generate.Template.Parameter;
 
@@ -130,7 +130,7 @@ public class Bean {
         fieldList.add(field);
         bean.setFieldList(fieldList);
         parameter.setTemplateFile(templateFile);
-        parameter.setToFile(toDirectory + bean.getPackageName().replace(Constant.Symbol.DOT, Constant.Symbol.SLASH_LEFT) + Constant.Symbol.SLASH_LEFT + bean.getClassName() + ".java");
+        parameter.setToFile(toDirectory + bean.getPackageName().replace(Constants.Symbol.DOT, Constants.Symbol.SLASH_LEFT) + Constants.Symbol.SLASH_LEFT + bean.getClassName() + ".java");
         parameter.setObject(bean);
         System.out.println(parameter.getToFile());
         template.generate(parameter);

@@ -2,7 +2,7 @@ package com.oneliang.test.communication.base.protocol;
 
 import java.io.ByteArrayOutputStream;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.util.common.MathUtil;
 
 public class TcpPacket implements Packet {
@@ -27,7 +27,7 @@ public class TcpPacket implements Packet {
     public TcpPacket(byte type, String bodyString) {
         this.type = type;
         try {
-            this.body = bodyString.getBytes(Constant.Encoding.UTF8);
+            this.body = bodyString.getBytes(Constants.Encoding.UTF8);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -36,7 +36,7 @@ public class TcpPacket implements Packet {
     public String getBodyString() {
         String result = null;
         try {
-            result = new String(this.body, Constant.Encoding.UTF8);
+            result = new String(this.body, Constants.Encoding.UTF8);
         } catch (Exception e) {
             e.printStackTrace();
         }

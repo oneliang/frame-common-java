@@ -5,7 +5,7 @@ import java.util.List;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.frame.bean.Page;
 import com.oneliang.util.common.StringUtil;
 import com.oneliang.util.common.TagUtil;
@@ -54,7 +54,7 @@ public class TableBodyTag extends BodyTagSupport {
 		String tdString=this.bodyContent.getString().trim();
 		Object o = null;
 		if (!this.value.equals("")) {
-			if (this.scope.equals(Constant.RequestScope.SESSION)) {
+			if (this.scope.equals(Constants.RequestScope.SESSION)) {
 				o=this.pageContext.getSession().getAttribute(this.value);
 			} else {
 				o=this.pageContext.getRequest().getAttribute(this.value);
@@ -68,7 +68,7 @@ public class TableBodyTag extends BodyTagSupport {
 			//pagination object
 			Object pageObject=null;
 			if(StringUtil.isNotBlank(this.paginationValue)){
-				if(this.paginationScope.equals(Constant.RequestScope.SESSION)){
+				if(this.paginationScope.equals(Constants.RequestScope.SESSION)){
 					pageObject=this.pageContext.getSession().getAttribute(this.paginationValue);
 				}else{
 					pageObject=this.pageContext.getRequest().getAttribute(this.paginationValue);
@@ -105,7 +105,7 @@ public class TableBodyTag extends BodyTagSupport {
 				try {
 					this.pageContext.getOut().print(trs.toString());
 				} catch (Exception e) {
-					logger.error(Constant.Base.EXCEPTION, e);
+					logger.error(Constants.Base.EXCEPTION, e);
 				}
 			}else if(o instanceof Object){
 				StringBuilder trs = new StringBuilder();

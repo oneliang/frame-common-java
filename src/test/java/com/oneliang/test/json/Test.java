@@ -3,7 +3,7 @@ package com.oneliang.test.json;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import com.oneliang.Constant;
+import com.oneliang.Constants;
 import com.oneliang.util.common.ClassUtil;
 import com.oneliang.util.common.ObjectUtil;
 import com.oneliang.util.json.JsonObject;
@@ -19,8 +19,8 @@ public class Test {
         for(Method method:methods){
             String methodName=method.getName();
             String fieldName=null;
-            if(methodName.startsWith(Constant.Method.PREFIX_SET)){
-                fieldName=ObjectUtil.methodNameToFieldName(Constant.Method.PREFIX_SET, methodName);
+            if(methodName.startsWith(Constants.Method.PREFIX_SET)){
+                fieldName=ObjectUtil.methodNameToFieldName(Constants.Method.PREFIX_SET, methodName);
             }
             if(fieldName!=null){
                 Class<?>[] classes=method.getParameterTypes();
