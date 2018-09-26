@@ -39,7 +39,7 @@ public final class CollectUtil {
      * @param advancedOption
      * @return ByteArrayOutputStream
      */
-    public static ByteArrayOutputStream collectFromHttp(String httpUrl, List<HttpNameValue> httpHeaderList, AdvancedOption advancedOption) {
+    public static ByteArrayOutputStream collectFromHttp(final String httpUrl, List<HttpNameValue> httpHeaderList, AdvancedOption advancedOption) {
         final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         HttpUtil.sendRequestGet(httpUrl, httpHeaderList, advancedOption, new Callback() {
             public void httpOkCallback(Map<String, List<String>> headerFieldMap, InputStream inputStream, int contentLength) throws Exception {
