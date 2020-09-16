@@ -24,15 +24,14 @@ sourceSets {
 }
 
 repositories {
-	mavenLocal()
-    maven { 
-    	url 'http://repo1.maven.org/maven2' 
-    }
+    mavenLocal()
+    google()
+    jcenter()
 }
 
 dependencies {
 	compile 'javaee:javaee-api:5'
-	compile 'net.sourceforge.jexcelapi:jxl:2.6.12'
+	compile 'net.sourceforge.jexcelapi:jxl:2.6.10'
 	compile 'com.oneliang:common-util:1.0'
 }
 
